@@ -1,6 +1,10 @@
 using Microsoft.OpenApi;
+using VaccinationSystem.Application;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Adicionar mediatR e dependências na camada de Application
+builder.Services.AddApplication();
 
 builder.Services.AddControllers();
 

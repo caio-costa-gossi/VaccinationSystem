@@ -1,13 +1,19 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using VaccinationSystem.Application.Persons.GetPerson;
 
 namespace VaccinationSystem.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class PersonController : ControllerBase
+[Route("api/persons")]
+public class PersonController(ISender sender) : ControllerBase
 {
-    public IActionResult GetPersons()
+    private readonly ISender _sender = sender;
+
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetPersonById(Guid id)
     {
-        return Ok();
+        GetPersonDto personDto = await _sender.Send(new GetPersonQuery(id));
+        return Ok(personDto);
     }
 }

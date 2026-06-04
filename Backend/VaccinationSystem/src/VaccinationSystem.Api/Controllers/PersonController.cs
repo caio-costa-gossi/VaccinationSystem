@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using VaccinationSystem.Application.Persons.CreatePerson;
+using VaccinationSystem.Application.Persons.DeletePerson;
 using VaccinationSystem.Application.Persons.GetPerson;
 
 namespace VaccinationSystem.Api.Controllers;
@@ -23,5 +24,12 @@ public class PersonController(ISender sender) : ControllerBase
     {
         Guid newGuid = await _sender.Send(command);
         return Ok(newGuid);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeletePerson(Guid id)
+    {
+        await _sender.Send(new DeletePersonCommand(id));
+        return NoContent();
     }
 }

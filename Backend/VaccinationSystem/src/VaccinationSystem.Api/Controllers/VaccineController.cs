@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using VaccinationSystem.Application.Vaccines.CreateVaccine;
 using VaccinationSystem.Application.Vaccines.GetVaccines;
 
 namespace VaccinationSystem.Api.Controllers
@@ -15,6 +16,13 @@ namespace VaccinationSystem.Api.Controllers
         {
             List<GetVaccinesItemDto> vaccines = await _sender.Send(new GetVaccinesQuery());
             return Ok(vaccines);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateVaccine([FromBody] CreateVaccineCommand command)
+        {
+            Guid newGuid = await _sender.Send(command);
+            return Ok(newGuid);
         }
     }
 }

@@ -24,7 +24,8 @@ public class Person
     public Vaccination AddVaccination(Guid vaccineId, int doseNumber)
     {
         // Validar número da dose
-        int lastDose = Vaccinations.Count > 0 ? Vaccinations.Max(e => e.DoseNumber) : 0;
+        List<Vaccination> vaccinations = Vaccinations.Where(e => e.VaccineId == vaccineId).ToList();
+        int lastDose = vaccinations.Count > 0 ? vaccinations.Max(e => e.DoseNumber) : 0;
 
         if (doseNumber != lastDose + 1)
             throw new BusinessRuleViolationException("Dose da vacina inválida.");

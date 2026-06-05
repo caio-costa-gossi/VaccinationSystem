@@ -1,4 +1,5 @@
 using Microsoft.OpenApi;
+using VaccinationSystem.Api.Middlewares;
 using VaccinationSystem.Application;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,8 @@ builder.Services.AddSwaggerGen(options =>
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     // Swagger middleware

@@ -19,10 +19,6 @@ namespace VaccinationSystem.Infrastructure.Persistence.Configurations
             builder.Property(x => x.AppliedAt)
                 .IsRequired();
 
-            builder.HasOne<Person>()
-                .WithMany(x => x.Vaccinations)
-                .HasForeignKey(x => x.PersonId);
-
             builder.HasOne<Vaccine>()
                 .WithMany()
                 .HasForeignKey(x => x.VaccineId);

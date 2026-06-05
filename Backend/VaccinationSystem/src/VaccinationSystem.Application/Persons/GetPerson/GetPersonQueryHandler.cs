@@ -14,7 +14,7 @@ namespace VaccinationSystem.Application.Persons.GetPerson
             return new GetPersonDto(
                 Guid.NewGuid(), 
                 "Mock", 
-                [new VaccinationDto(Guid.NewGuid(), Guid.NewGuid(), 1, DateTime.Now)]
+                [new GetVaccinationDto(Guid.NewGuid(), Guid.NewGuid(), 1, DateTime.Now)]
             );
         }
     }

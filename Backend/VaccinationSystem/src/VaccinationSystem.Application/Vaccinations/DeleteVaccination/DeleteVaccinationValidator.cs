@@ -6,7 +6,10 @@ namespace VaccinationSystem.Application.Vaccinations.DeleteVaccination
     {
         public DeleteVaccinationValidator()
         {
-            RuleFor(x => x.Id)
+            RuleFor(x => x.PersonId)
+                .NotEmpty();
+
+            RuleFor(x => x.VaccinationId)
                 .NotEmpty();
         }
     }

@@ -8,6 +8,13 @@ namespace VaccinationSystem.Infrastructure.Persistence.Repositories
     {
         private readonly AppDbContext _appDbContext = appDbContext;
         
+        public async Task<Vaccine?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await _appDbContext.Vaccines
+                .Where(e => e.Id == id)
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+        
         public async Task<List<Vaccine>> GetAllAsync(CancellationToken cancellationToken)
         {
             return await _appDbContext.Vaccines

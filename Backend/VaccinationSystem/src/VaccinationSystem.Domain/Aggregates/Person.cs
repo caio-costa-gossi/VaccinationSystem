@@ -1,4 +1,5 @@
-﻿using VaccinationSystem.Domain.Entities;
+﻿using VaccinationSystem.Domain.Common.Exceptions;
+using VaccinationSystem.Domain.Entities;
 
 namespace VaccinationSystem.Domain.Aggregates;
 
@@ -20,13 +21,13 @@ public class Person
         Name = name;
     }
 
-    public Vaccination? AddVaccination(Guid vaccineId, int doseNumber)
+    public Vaccination AddVaccination(Guid vaccineId, int doseNumber)
     {
         // Validar número da dose
         int lastDose = Vaccinations.Count > 0 ? Vaccinations.Max(e => e.DoseNumber) : 0;
 
         if (doseNumber != lastDose + 1)
-            return null;
+            throw new BusinessRuleViolationException("Dose da vacina inválida.");
 
         // Criar e adicionar nova vaccination
         Vaccination newVaccination = new()

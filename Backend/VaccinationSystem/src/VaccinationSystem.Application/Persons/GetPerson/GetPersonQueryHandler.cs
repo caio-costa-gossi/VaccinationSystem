@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using VaccinationSystem.Application.Common.Exceptions;
 using VaccinationSystem.Application.Common.Interfaces;
 using VaccinationSystem.Domain.Aggregates;
 
@@ -14,14 +15,15 @@ namespace VaccinationSystem.Application.Persons.GetPerson
         {
             Person? person = await _personRepository.GetByIdAsync(request.Id, cancellationToken);
 
-            return person != null ?
-                new GetPersonDto(
+            if (person == null)
+                throw new NotFoundException($"Person with ID {request.Id} does not exist.");
+
+            return new GetPersonDto(
                     person.Id,
                     person.Name,
                     person.Vaccinations
                         .Select(v => new GetVaccinationDto(v.Id, v.VaccineId, v.DoseNumber, v.AppliedAt)).ToList()
-                ) :
-                null;
+                );
         }
     }
 }

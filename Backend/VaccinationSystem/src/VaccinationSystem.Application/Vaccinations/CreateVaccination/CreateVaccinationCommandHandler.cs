@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using VaccinationSystem.Application.Common.Exceptions;
 using VaccinationSystem.Application.Common.Interfaces;
 using VaccinationSystem.Domain.Aggregates;
 using VaccinationSystem.Domain.Entities;
@@ -16,15 +17,15 @@ namespace VaccinationSystem.Application.Vaccinations.CreateVaccination
         public async Task<Guid> Handle(CreateVaccinationCommand request, CancellationToken cancellationToken)
         {
             Person? person = await _personRepository.GetByIdAsync(request.PersonId, cancellationToken);
-            
-            if (person == null)
-                return Guid.Empty;
 
-            Vaccination? newVaccination = person.AddVaccination(request.VaccineId, request.DoseNumber);
+            if (person == null)
+                throw new NotFoundException($"Person with ID {request.PersonId} does not exist.");
+
+            Vaccination newVaccination = person.AddVaccination(request.VaccineId, request.DoseNumber);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return newVaccination != null ? newVaccination.Id : Guid.Empty;
+            return newVaccination.Id;
         }
     }
 }

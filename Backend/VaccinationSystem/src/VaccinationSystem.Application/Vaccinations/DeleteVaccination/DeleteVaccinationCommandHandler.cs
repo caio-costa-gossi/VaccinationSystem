@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using VaccinationSystem.Application.Common.Exceptions;
 using VaccinationSystem.Application.Common.Interfaces;
 using VaccinationSystem.Domain.Aggregates;
 
@@ -17,7 +18,7 @@ namespace VaccinationSystem.Application.Vaccinations.DeleteVaccination
             Person? person = await _personRepository.GetByIdAsync(request.PersonId, cancellationToken);
 
             if (person == null)
-                return;
+                throw new NotFoundException($"Person with ID {request.PersonId} does not exist.");
 
             person.RemoveVaccination(request.VaccinationId);
 

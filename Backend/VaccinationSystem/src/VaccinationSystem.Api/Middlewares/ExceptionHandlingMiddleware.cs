@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using VaccinationSystem.Application.Common.Exceptions;
+using VaccinationSystem.Domain.Common.Exceptions;
 
 namespace VaccinationSystem.Api.Middlewares
 {
@@ -24,12 +26,45 @@ namespace VaccinationSystem.Api.Middlewares
                 await context.Response.WriteAsJsonAsync(
                     new
                     {
+                        ErrorCode = 6,
                         Errors = ex.Errors.Select(e => new
                         {
                             e.PropertyName,
                             e.ErrorMessage,
                             e.Severity
                         })
+                    });
+            }
+            catch (BusinessRuleViolationException ex)
+            {
+                if (context.Response.HasStarted)
+                    throw;
+
+                // Status 400 e mensagem de erro
+                context.Response.Clear();
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+                await context.Response.WriteAsJsonAsync(
+                    new
+                    {
+                        ErrorCode = 5,
+                        Message = ex.Message
+                    });
+            }
+            catch (NotFoundException ex)
+            {
+                if (context.Response.HasStarted)
+                    throw;
+
+                // Status 400 e mensagem de erro
+                context.Response.Clear();
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+                await context.Response.WriteAsJsonAsync(
+                    new
+                    {
+                        ErrorCode = 4,
+                        Message = ex.Message
                     });
             }
             catch (Exception ex)
@@ -44,7 +79,8 @@ namespace VaccinationSystem.Api.Middlewares
                 await context.Response.WriteAsJsonAsync(
                     new
                     {
-                        Error = ex.Message
+                        ErrorCode = 500,
+                        Message = ex.Message
                     });
             }
         }

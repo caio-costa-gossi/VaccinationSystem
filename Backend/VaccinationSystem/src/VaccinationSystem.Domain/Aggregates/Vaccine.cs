@@ -17,7 +17,7 @@ namespace VaccinationSystem.Domain.Aggregates
             if (string.IsNullOrEmpty(name))
                 throw new Exception("Nome é necessário");
 
-            Id = Guid.NewGuid();
+            Id = default;
             Name = name;
         }
     }

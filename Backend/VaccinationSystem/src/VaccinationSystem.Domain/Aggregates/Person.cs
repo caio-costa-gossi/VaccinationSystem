@@ -20,13 +20,13 @@ public class Person
         Name = name;
     }
 
-    public Guid AddVaccination(Guid vaccineId, int doseNumber)
+    public Vaccination? AddVaccination(Guid vaccineId, int doseNumber)
     {
         // Validar número da dose
         int lastDose = Vaccinations.Count > 0 ? Vaccinations.Max(e => e.DoseNumber) : 0;
 
         if (doseNumber != lastDose + 1)
-            return Guid.Empty;
+            return null;
 
         // Criar e adicionar nova vaccination
         Vaccination newVaccination = new()
@@ -39,7 +39,7 @@ public class Person
 
         Vaccinations.Add(newVaccination);
 
-        return newVaccination.Id;
+        return newVaccination;
     }
 
     public void RemoveVaccination(Guid vaccinationId)

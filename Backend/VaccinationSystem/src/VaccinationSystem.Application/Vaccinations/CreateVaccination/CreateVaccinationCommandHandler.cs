@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using VaccinationSystem.Application.Common.Interfaces;
 using VaccinationSystem.Domain.Aggregates;
+using VaccinationSystem.Domain.Entities;
 
 namespace VaccinationSystem.Application.Vaccinations.CreateVaccination
 {
@@ -19,11 +20,11 @@ namespace VaccinationSystem.Application.Vaccinations.CreateVaccination
             if (person == null)
                 return Guid.Empty;
 
-            Guid newVaccination = person.AddVaccination(request.VaccineId, request.DoseNumber);
+            Vaccination? newVaccination = person.AddVaccination(request.VaccineId, request.DoseNumber);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return newVaccination;
+            return newVaccination != null ? newVaccination.Id : Guid.Empty;
         }
     }
 }

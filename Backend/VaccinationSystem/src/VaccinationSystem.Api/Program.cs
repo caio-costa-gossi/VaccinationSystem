@@ -1,15 +1,20 @@
 using Microsoft.OpenApi;
 using VaccinationSystem.Api.Middlewares;
 using VaccinationSystem.Application;
+using VaccinationSystem.Infrastructure;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Adicionar mediatR e dependências na camada de Application
+// Adicionar MediatR, FluentValidation e services da camada de Application
 builder.Services.AddApplication();
 
+// Adicionar AppDbContext e services da camada de Infrastructure
+builder.Services.AddInfrastructure(builder.Configuration);
+
+// Adicionar controllers
 builder.Services.AddControllers();
 
-// Add Swagger information
+// Adicionar informações do Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -23,7 +28,7 @@ builder.Services.AddSwaggerGen(options =>
 
 WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configurar middlewares
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())

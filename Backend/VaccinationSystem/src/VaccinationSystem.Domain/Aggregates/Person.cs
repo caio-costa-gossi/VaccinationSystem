@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using VaccinationSystem.Domain.Entities;
+﻿using VaccinationSystem.Domain.Entities;
 
 namespace VaccinationSystem.Domain.Aggregates;
 
@@ -7,8 +6,7 @@ public class Person
 {
     public Guid Id { get; private set; }
     public string Name { get; private set; } = "";
-
-    private readonly List<Vaccination> _vaccinations = [];
+    public List<Vaccination> Vaccinations { get; private set; } = [];
 
     // Para EF Core apenas
     private Person() { }

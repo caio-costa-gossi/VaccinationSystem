@@ -19,11 +19,11 @@ namespace VaccinationSystem.Application.Vaccinations.CreateVaccination
             if (person == null)
                 return Guid.Empty;
 
-            person.AddVaccination(request.VaccineId, request.DoseNumber);
+            Guid newVaccination = person.AddVaccination(request.VaccineId, request.DoseNumber);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Guid.NewGuid();
+            return newVaccination;
         }
     }
 }

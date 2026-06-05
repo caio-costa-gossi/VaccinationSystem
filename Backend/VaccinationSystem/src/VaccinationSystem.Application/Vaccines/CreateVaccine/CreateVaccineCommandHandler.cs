@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using VaccinationSystem.Application.Common.Interfaces;
+using VaccinationSystem.Domain.Aggregates;
 
 namespace VaccinationSystem.Application.Vaccines.CreateVaccine
 {
@@ -13,7 +14,12 @@ namespace VaccinationSystem.Application.Vaccines.CreateVaccine
 
         public async Task<Guid> Handle(CreateVaccineCommand request, CancellationToken cancellationToken)
         {
-            return Guid.NewGuid();
+            Vaccine newVaccine = new(request.Name);
+
+            await _vaccineRepository.AddAsync(newVaccine, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            
+            return newVaccine.Id;
         }
     }
 }

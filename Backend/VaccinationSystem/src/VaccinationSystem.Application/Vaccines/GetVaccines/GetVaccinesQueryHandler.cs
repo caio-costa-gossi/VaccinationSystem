@@ -11,7 +11,12 @@ namespace VaccinationSystem.Application.Vaccines.GetVaccines
 
         public async Task<List<GetVaccinesItemDto>> Handle(GetVaccinesQuery request, CancellationToken cancellationToken)
         {
-            return [new GetVaccinesItemDto(Guid.NewGuid(), "Vaccine name")];
+            List<GetVaccinesItemDto> vaccines =
+                (await _vaccineRepository.GetAllAsync(cancellationToken))
+                .Select(e => new GetVaccinesItemDto(e.Id, e.Name))
+                .ToList();
+            
+            return vaccines;
         }
     }
 }

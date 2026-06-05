@@ -13,6 +13,9 @@ namespace VaccinationSystem.Application.Persons.DeletePerson
 
         public async Task Handle(DeletePersonCommand request, CancellationToken cancellationToken)
         {
+            await _personRepository.DeleteByIdAsync(request.Id, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
             return;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using VaccinationSystem.Application.Common.Interfaces;
+using VaccinationSystem.Domain.Aggregates;
 
 namespace VaccinationSystem.Application.Vaccinations.DeleteVaccination
 {
@@ -13,7 +14,14 @@ namespace VaccinationSystem.Application.Vaccinations.DeleteVaccination
 
         public async Task Handle(DeleteVaccinationCommand request, CancellationToken cancellationToken)
         {
-            return;
+            Person? person = await _personRepository.GetByIdAsync(request.PersonId, cancellationToken);
+
+            if (person == null)
+                return;
+
+            person.RemoveVaccination(request.VaccinationId);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

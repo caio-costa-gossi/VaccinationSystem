@@ -18,7 +18,7 @@ public class PersonController(ISender sender) : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetPersonById(Guid id)
     {
-        GetPersonDto personDto = await _sender.Send(new GetPersonQuery(id));
+        GetPersonDto? personDto = await _sender.Send(new GetPersonQuery(id));
         return Ok(personDto);
     }
 

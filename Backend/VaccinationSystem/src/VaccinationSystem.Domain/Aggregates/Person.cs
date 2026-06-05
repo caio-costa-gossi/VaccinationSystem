@@ -19,4 +19,32 @@ public class Person
         Id = Guid.NewGuid();
         Name = name;
     }
+
+    public Guid AddVaccination(Guid vaccineId, int doseNumber)
+    {
+        // Validar número da dose
+        int lastDose = Vaccinations.Max(e => e.DoseNumber);
+
+        if (doseNumber != lastDose + 1)
+            return Guid.Empty;
+
+        // Criar e adicionar nova vaccination
+        Vaccination newVaccination = new()
+        {
+            Id = Guid.NewGuid(),
+            VaccineId = vaccineId,
+            PersonId = Id,
+            DoseNumber = doseNumber,
+            AppliedAt = DateTime.UtcNow,
+        };
+
+        Vaccinations.Add(newVaccination);
+
+        return newVaccination.Id;
+    }
+
+    public void RemoveVaccination(Guid vaccinationId)
+    {
+        Vaccinations.RemoveAll(v => v.Id == vaccinationId);
+    }
 }

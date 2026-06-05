@@ -7,7 +7,8 @@ namespace VaccinationSystem.Application.Vaccines.CreateVaccine
         public CreateVaccineValidator()
         {
             RuleFor(x => x.Name)
-                .NotEmpty();
+                .NotEmpty()
+                .MaximumLength(255);
         }
     }
 }

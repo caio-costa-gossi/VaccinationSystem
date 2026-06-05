@@ -1,4 +1,6 @@
-﻿namespace VaccinationSystem.Domain.Entities
+﻿using VaccinationSystem.Domain.Aggregates;
+
+namespace VaccinationSystem.Domain.Entities
 {
     public class Vaccination
     {
@@ -7,5 +9,7 @@
         public Guid PersonId { get; set; }
         public int DoseNumber { get; set; }
         public DateTime AppliedAt { get; set; }
+
+        public Vaccine? Vaccine { get; set; }
     }
 }

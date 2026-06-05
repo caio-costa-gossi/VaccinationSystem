@@ -13,6 +13,7 @@ namespace VaccinationSystem.Infrastructure.Persistence.Repositories
             return await _appDbContext.Persons
                 .Where(e => e.Id == id)
                 .Include(e => e.Vaccinations)
+                    .ThenInclude(e => e.Vaccine)
                 .FirstOrDefaultAsync(cancellationToken);
         }
 

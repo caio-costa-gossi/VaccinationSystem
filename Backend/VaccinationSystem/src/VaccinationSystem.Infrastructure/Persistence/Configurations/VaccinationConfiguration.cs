@@ -19,7 +19,7 @@ namespace VaccinationSystem.Infrastructure.Persistence.Configurations
             builder.Property(x => x.AppliedAt)
                 .IsRequired();
 
-            builder.HasOne<Vaccine>()
+            builder.HasOne(x => x.Vaccine)
                 .WithMany()
                 .HasForeignKey(x => x.VaccineId);
         }

@@ -13,6 +13,7 @@ namespace VaccinationSystem.Application.Persons.GetPerson
 
         public async Task<GetPersonDto?> Handle(GetPersonQuery request, CancellationToken cancellationToken)
         {
+            // Repositório inclui Vaccinations e Vaccinations.Vaccine
             Person? person = await _personRepository.GetByIdAsync(request.Id, cancellationToken);
 
             if (person == null)
@@ -22,7 +23,12 @@ namespace VaccinationSystem.Application.Persons.GetPerson
                     person.Id,
                     person.Name,
                     person.Vaccinations
-                        .Select(v => new GetVaccinationDto(v.Id, v.VaccineId, v.DoseNumber, v.AppliedAt)).ToList()
+                        .Select(v => new GetVaccinationDto(
+                            v.Id, 
+                            new GetVaccineDto(v.Vaccine!.Id, v.Vaccine!.Name), 
+                            v.DoseNumber, 
+                            v.AppliedAt)
+                        ).ToList()
                 );
         }
     }

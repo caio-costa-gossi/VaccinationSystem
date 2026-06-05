@@ -23,7 +23,7 @@ public class Person
     public Guid AddVaccination(Guid vaccineId, int doseNumber)
     {
         // Validar número da dose
-        int lastDose = Vaccinations.Max(e => e.DoseNumber);
+        int lastDose = Vaccinations.Count > 0 ? Vaccinations.Max(e => e.DoseNumber) : 0;
 
         if (doseNumber != lastDose + 1)
             return Guid.Empty;
@@ -31,7 +31,6 @@ public class Person
         // Criar e adicionar nova vaccination
         Vaccination newVaccination = new()
         {
-            Id = Guid.NewGuid(),
             VaccineId = vaccineId,
             PersonId = Id,
             DoseNumber = doseNumber,

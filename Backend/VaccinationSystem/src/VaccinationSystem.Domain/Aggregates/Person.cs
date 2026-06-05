@@ -31,6 +31,7 @@ public class Person
         // Criar e adicionar nova vaccination
         Vaccination newVaccination = new()
         {
+            Id = default,
             VaccineId = vaccineId,
             PersonId = Id,
             DoseNumber = doseNumber,

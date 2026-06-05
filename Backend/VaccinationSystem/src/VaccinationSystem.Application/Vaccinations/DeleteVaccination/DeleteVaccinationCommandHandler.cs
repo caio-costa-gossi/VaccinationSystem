@@ -1,10 +1,13 @@
 ﻿using MediatR;
+using VaccinationSystem.Application.Common.Interfaces;
 
 namespace VaccinationSystem.Application.Vaccinations.DeleteVaccination
 {
-    public class DeleteVaccinationCommandHandler : IRequestHandler<DeleteVaccinationCommand>
+    public class DeleteVaccinationCommandHandler(
+        IPersonRepository personRepository) 
+        : IRequestHandler<DeleteVaccinationCommand>
     {
-        public DeleteVaccinationCommandHandler() { }
+        private readonly IPersonRepository _personRepository = personRepository;
 
         public async Task Handle(DeleteVaccinationCommand request, CancellationToken cancellationToken)
         {

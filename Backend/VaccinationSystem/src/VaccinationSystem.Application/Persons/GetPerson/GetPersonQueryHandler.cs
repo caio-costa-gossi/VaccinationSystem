@@ -1,10 +1,13 @@
 ﻿using MediatR;
+using VaccinationSystem.Application.Common.Interfaces;
 
 namespace VaccinationSystem.Application.Persons.GetPerson
 {
-    public class GetPersonQueryHandler : IRequestHandler<GetPersonQuery,GetPersonDto>
+    public class GetPersonQueryHandler(
+        IPersonRepository personRepository) 
+        : IRequestHandler<GetPersonQuery,GetPersonDto>
     {
-        public GetPersonQueryHandler() { }
+        private readonly IPersonRepository _personRepository = personRepository;
 
         public async Task<GetPersonDto> Handle(GetPersonQuery request, CancellationToken cancellationToken)
         {

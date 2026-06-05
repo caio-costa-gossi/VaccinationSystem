@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VaccinationSystem.Application.Common.Interfaces;
 using VaccinationSystem.Infrastructure.Persistence;
+using VaccinationSystem.Infrastructure.Persistence.Repositories;
 
 namespace VaccinationSystem.Infrastructure
 {
@@ -14,6 +16,12 @@ namespace VaccinationSystem.Infrastructure
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(
                     configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Repositories
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IVaccineRepository, VaccineRepository>();
             
             return services;
         }

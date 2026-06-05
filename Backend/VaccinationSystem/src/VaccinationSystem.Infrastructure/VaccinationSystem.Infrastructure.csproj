@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VaccinationSystem.Application\VaccinationSystem.Application.csproj" />
     <ProjectReference Include="..\VaccinationSystem.Domain\VaccinationSystem.Domain.csproj" />
   </ItemGroup>
 

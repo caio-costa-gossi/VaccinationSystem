@@ -9,5 +9,7 @@ namespace VaccinationSystem.Application.Common.Interfaces
         Task<List<Vaccine>> GetAllAsync(CancellationToken cancellationToken);
 
         Task AddAsync(Vaccine vaccine, CancellationToken cancellationToken);
+
+        Task DeleteByIdAsync(Guid id, CancellationToken cancellationToken);
     }
 }

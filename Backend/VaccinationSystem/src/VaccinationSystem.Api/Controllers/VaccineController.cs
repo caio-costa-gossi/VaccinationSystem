@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VaccinationSystem.Application.Vaccines.CreateVaccine;
+using VaccinationSystem.Application.Vaccines.DeleteVaccine;
 using VaccinationSystem.Application.Vaccines.GetVaccines;
 
 namespace VaccinationSystem.Api.Controllers
@@ -25,6 +26,13 @@ namespace VaccinationSystem.Api.Controllers
         {
             Guid newGuid = await _sender.Send(command);
             return Ok(newGuid);
+        }
+
+        [HttpDelete("{vaccineId:guid}")]
+        public async Task<IActionResult> DeleteVaccine(Guid vaccineId)
+        {
+            await _sender.Send(new DeleteVaccineCommand(vaccineId));
+            return NoContent();
         }
     }
 }

@@ -25,5 +25,17 @@ namespace VaccinationSystem.Infrastructure.Persistence.Repositories
         {
             await _appDbContext.AddAsync(vaccine, cancellationToken);
         }
+
+        public async Task DeleteByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            Vaccine? e = await _appDbContext.Vaccines
+                .Where(e => e.Id == id)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (e == null)
+                return;
+
+            _appDbContext.Remove(e);
+        }
     }
 }

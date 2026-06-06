@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VaccinationSystem.Application.Vaccines.CreateVaccine;
 using VaccinationSystem.Application.Vaccines.GetVaccines;
@@ -12,6 +13,7 @@ namespace VaccinationSystem.Api.Controllers
         private readonly ISender _sender = sender;
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetVaccines()
         {
             List<GetVaccinesItemDto> vaccines = await _sender.Send(new GetVaccinesQuery());
@@ -19,6 +21,7 @@ namespace VaccinationSystem.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateVaccine([FromBody] CreateVaccineCommand command)
         {
             Guid newGuid = await _sender.Send(command);

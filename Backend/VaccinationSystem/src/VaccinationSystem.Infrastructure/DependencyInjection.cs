@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VaccinationSystem.Application.Common.Interfaces;
-using VaccinationSystem.Domain.Auth;
-using VaccinationSystem.Infrastructure.Auth;
 using VaccinationSystem.Infrastructure.Persistence;
 using VaccinationSystem.Infrastructure.Persistence.Repositories;
 
@@ -23,14 +20,6 @@ namespace VaccinationSystem.Infrastructure
 
             // Unit of work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            // JWT/Auth Services
-            services.AddSingleton<JwtConfig>(
-                configuration.GetSection("Jwt").Get<JwtConfig>() ?? 
-                throw new InvalidOperationException("Invalid JWT configuration"));
-
-            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
-            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
             // Repositories
             services.AddScoped<IPersonRepository, PersonRepository>();

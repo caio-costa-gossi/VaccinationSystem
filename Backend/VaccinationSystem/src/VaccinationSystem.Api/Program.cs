@@ -1,30 +1,25 @@
-using Microsoft.OpenApi;
 using VaccinationSystem.Api.Middlewares;
+using VaccinationSystem.Api.Swagger;
 using VaccinationSystem.Application;
 using VaccinationSystem.Infrastructure;
+using VaccinationSystem.Infrastructure.Auth;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Adicionar MediatR, FluentValidation e services da camada de Application
 builder.Services.AddApplication();
 
-// Adicionar AppDbContext e services da camada de Infrastructure
+// Adicionar AppDbContext, Unit of Work e repositórios
 builder.Services.AddInfrastructure(builder.Configuration);
+
+// Adicionar serviços de auth e JWT
+builder.Services.AddAuthServices(builder.Configuration);
 
 // Adicionar controllers
 builder.Services.AddControllers();
 
-// Adicionar informações do Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Version = "v1",
-        Title = "API para sistema de vacinação",
-        Description = "API para gerenciar carteiras de vacinação feita em ASP.NET Core 10"
-    });
-});
+// Adicionar informações para o Swagger
+builder.Services.AddSwaggerGenWithAuth();
 
 WebApplication app = builder.Build();
 
@@ -40,6 +35,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -7,11 +7,11 @@ namespace VaccinationSystem.Application.Persons.GetPerson
 {
     public class GetPersonQueryHandler(
         IPersonRepository personRepository) 
-        : IRequestHandler<GetPersonQuery,GetPersonDto?>
+        : IRequestHandler<GetPersonQuery,GetPersonDto>
     {
         private readonly IPersonRepository _personRepository = personRepository;
 
-        public async Task<GetPersonDto?> Handle(GetPersonQuery request, CancellationToken cancellationToken)
+        public async Task<GetPersonDto> Handle(GetPersonQuery request, CancellationToken cancellationToken)
         {
             // Repositório inclui Vaccinations e Vaccinations.Vaccine
             Person? person = await _personRepository.GetByIdAsync(request.Id, cancellationToken);

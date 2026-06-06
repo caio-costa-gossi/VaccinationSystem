@@ -22,6 +22,7 @@ namespace VaccinationSystem.Infrastructure
             // Repositories
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IVaccineRepository, VaccineRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             
             return services;
         }

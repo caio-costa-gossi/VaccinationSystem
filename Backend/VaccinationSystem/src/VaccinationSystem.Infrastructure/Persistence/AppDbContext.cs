@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VaccinationSystem.Domain.Aggregates;
+using VaccinationSystem.Domain.Auth;
 
 namespace VaccinationSystem.Infrastructure.Persistence
 {
@@ -19,6 +20,7 @@ namespace VaccinationSystem.Infrastructure.Persistence
 
         public DbSet<Vaccine> Vaccines => Set<Vaccine>();
 
-
+        // Auth
+        public DbSet<User> Users => Set<User>();
     }
 }

@@ -30,8 +30,4 @@
     <ProjectReference Include="..\..\src\VaccinationSystem.Domain\VaccinationSystem.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Application\Vaccines\" />
-  </ItemGroup>
-
 </Project>

@@ -1,19 +1,22 @@
 ﻿using MediatR;
 using VaccinationSystem.Application.Common.Interfaces;
+using VaccinationSystem.Domain.Auth;
 
 namespace VaccinationSystem.Application.Auth.LogIn
 {
     public class LoginCommandHandler(
         IUserRepository userRepository,
-        IUnitOfWork unitOfWork) 
+        IJwtTokenGenerator tokenGenerator) 
         : IRequestHandler<LoginCommand, LoginResponseDto>
     {
         private readonly IUserRepository _userRepository = userRepository;
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+        private readonly IJwtTokenGenerator _tokenGenerator = tokenGenerator;
 
         public async Task<LoginResponseDto> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            return new LoginResponseDto("AccessTokenHere");
+            return new LoginResponseDto(
+                _tokenGenerator.GenerateToken(
+                    new User { Id = Guid.NewGuid(), Name = "João", Password = "123" }));
         }
     }
 }

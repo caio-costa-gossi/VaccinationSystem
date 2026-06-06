@@ -1,6 +1,15 @@
-﻿namespace VaccinationSystem.Infrastructure.Auth
+﻿using VaccinationSystem.Application.Common.Interfaces;
+using VaccinationSystem.Domain.Auth;
+
+namespace VaccinationSystem.Infrastructure.Auth
 {
-    internal class JwtTokenGenerator
+    public class JwtTokenGenerator(JwtConfig config) : IJwtTokenGenerator
     {
+        private readonly JwtConfig _config = config;
+
+        public string GenerateToken(User user)
+        {
+            return _config.Key;
+        }
     }
 }

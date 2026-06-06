@@ -28,7 +28,7 @@ namespace VaccinationSystem.Application.Vaccinations.CreateVaccination
                 throw new NotFoundException($"Vaccine with ID {request.VaccineId} does not exist.");
 
             // Criar nova vaccination
-            Vaccination newVaccination = person.AddVaccination(request.VaccineId, request.DoseNumber);
+            Vaccination newVaccination = person.AddVaccination(request.VaccineId, request.DoseNumber, request.ApplicationDate);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 

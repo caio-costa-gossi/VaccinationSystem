@@ -45,7 +45,7 @@ namespace VaccinationSystem.Tests.Application.Vaccinations.CreateVaccination
                 .Setup(r => r.GetByIdAsync(vaccineId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(vaccine);
 
-            CreateVaccinationCommand command = new(personId, vaccineId, 1);
+            CreateVaccinationCommand command = new(personId, vaccineId, 1, DateOnly.FromDateTime(DateTime.Now));
 
             // Act
             Guid newVaccination = await _handler.Handle(command, CancellationToken.None);
@@ -76,7 +76,7 @@ namespace VaccinationSystem.Tests.Application.Vaccinations.CreateVaccination
                 .Setup(r => r.GetByIdAsync(vaccineId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(vaccine);
 
-            CreateVaccinationCommand command = new(personId, vaccineId, 2);
+            CreateVaccinationCommand command = new(personId, vaccineId, 2, DateOnly.FromDateTime(DateTime.Now));
 
             // Act/Assert
             await Assert.ThrowsAsync<BusinessRuleViolationException>(() =>
@@ -100,7 +100,7 @@ namespace VaccinationSystem.Tests.Application.Vaccinations.CreateVaccination
                 .Setup(r => r.GetByIdAsync(vaccineId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(vaccine);
 
-            CreateVaccinationCommand command = new(personId, vaccineId, 2);
+            CreateVaccinationCommand command = new(personId, vaccineId, 2, DateOnly.FromDateTime(DateTime.Now));
 
             // Act/Assert
             await Assert.ThrowsAsync<NotFoundException>(() =>
@@ -124,7 +124,7 @@ namespace VaccinationSystem.Tests.Application.Vaccinations.CreateVaccination
                 .Setup(r => r.GetByIdAsync(vaccineId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync((Vaccine?) null);
 
-            CreateVaccinationCommand command = new(personId, vaccineId, 2);
+            CreateVaccinationCommand command = new(personId, vaccineId, 2, DateOnly.FromDateTime(DateTime.Now));
 
             // Act/Assert
             await Assert.ThrowsAsync<NotFoundException>(() =>

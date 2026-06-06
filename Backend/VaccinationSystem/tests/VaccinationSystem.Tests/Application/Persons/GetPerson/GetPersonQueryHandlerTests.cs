@@ -37,7 +37,7 @@ namespace VaccinationSystem.Tests.Application.Persons.GetPerson
                 VaccineId = vaccineId,
                 PersonId = personId,
                 DoseNumber = 1,
-                AppliedAt = DateTime.Now,
+                AppliedAt = DateOnly.FromDateTime(DateTime.Now),
                 Vaccine = vaccine
             };
 

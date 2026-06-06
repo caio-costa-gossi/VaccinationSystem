@@ -21,7 +21,7 @@ public class Person
         Name = name;
     }
 
-    public Vaccination AddVaccination(Guid vaccineId, int doseNumber)
+    public Vaccination AddVaccination(Guid vaccineId, int doseNumber, DateOnly applicationDate)
     {
         // Validar número da dose
         List<Vaccination> vaccinations = Vaccinations.Where(e => e.VaccineId == vaccineId).ToList();
@@ -37,7 +37,7 @@ public class Person
             VaccineId = vaccineId,
             PersonId = Id,
             DoseNumber = doseNumber,
-            AppliedAt = DateTime.UtcNow,
+            AppliedAt = applicationDate,
         };
 
         Vaccinations.Add(newVaccination);

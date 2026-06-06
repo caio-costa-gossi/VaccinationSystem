@@ -6,11 +6,11 @@ namespace VaccinationSystem.Tests.Application.Vaccinations.CreateVaccination
     public class CreateVaccinationValidatorTests
     {
         [Fact]
-        public void Validate_WhenPersonIdIsValidVaccineIdIsValidAndDoseNumberIsValid_ShouldBeTrue()
+        public void Validate_WhenPersonIdIsValidVaccineIdIsValidDoseNumberIsValidAndApplicationDateNotDefault_ShouldBeTrue()
         {
             // Arrange
             CreateVaccinationValidator validator = new();
-            CreateVaccinationCommand command = new(Guid.NewGuid(), Guid.NewGuid(), 1);
+            CreateVaccinationCommand command = new(Guid.NewGuid(), Guid.NewGuid(), 1, DateOnly.FromDateTime(DateTime.Now));
 
             // Act
             ValidationResult result = validator.Validate(command);
@@ -24,7 +24,7 @@ namespace VaccinationSystem.Tests.Application.Vaccinations.CreateVaccination
         {
             // Arrange
             CreateVaccinationValidator validator = new();
-            CreateVaccinationCommand command = new(Guid.Empty, Guid.NewGuid(), 1);
+            CreateVaccinationCommand command = new(Guid.Empty, Guid.NewGuid(), 1, DateOnly.FromDateTime(DateTime.Now));
 
             // Act
             ValidationResult result = validator.Validate(command);
@@ -38,7 +38,7 @@ namespace VaccinationSystem.Tests.Application.Vaccinations.CreateVaccination
         {
             // Arrange
             CreateVaccinationValidator validator = new();
-            CreateVaccinationCommand command = new(Guid.NewGuid(), Guid.Empty, 1);
+            CreateVaccinationCommand command = new(Guid.NewGuid(), Guid.Empty, 1, DateOnly.FromDateTime(DateTime.Now));
 
             // Act
             ValidationResult result = validator.Validate(command);
@@ -52,7 +52,21 @@ namespace VaccinationSystem.Tests.Application.Vaccinations.CreateVaccination
         {
             // Arrange
             CreateVaccinationValidator validator = new();
-            CreateVaccinationCommand command = new(Guid.NewGuid(), Guid.NewGuid(), -1);
+            CreateVaccinationCommand command = new(Guid.NewGuid(), Guid.NewGuid(), -1, DateOnly.FromDateTime(DateTime.Now));
+
+            // Act
+            ValidationResult result = validator.Validate(command);
+
+            // Assert
+            Assert.False(result.IsValid);
+        }
+
+        [Fact]
+        public void Validate_WhenApplicationDateIsDefault_ShouldBeFalse()
+        {
+            // Arrange
+            CreateVaccinationValidator validator = new();
+            CreateVaccinationCommand command = new(Guid.NewGuid(), Guid.NewGuid(), 1, default);
 
             // Act
             ValidationResult result = validator.Validate(command);

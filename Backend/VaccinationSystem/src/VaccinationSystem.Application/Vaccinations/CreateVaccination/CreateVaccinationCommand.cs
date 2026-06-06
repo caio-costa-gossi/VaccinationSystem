@@ -2,5 +2,5 @@
 
 namespace VaccinationSystem.Application.Vaccinations.CreateVaccination
 {
-    public record CreateVaccinationCommand(Guid PersonId, Guid VaccineId, int DoseNumber) : IRequest<Guid>;
+    public record CreateVaccinationCommand(Guid PersonId, Guid VaccineId, int DoseNumber, DateOnly ApplicationDate) : IRequest<Guid>;
 }

@@ -1,4 +1,4 @@
 ﻿namespace VaccinationSystem.Application.Vaccinations.CreateVaccination
 {
-    public record NewVaccinationDto(Guid VaccineId, int DoseNumber);
+    public record NewVaccinationDto(Guid VaccineId, int DoseNumber, DateOnly ApplicationDate);
 }

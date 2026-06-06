@@ -44,7 +44,12 @@ public class PersonController(ISender sender) : ControllerBase
         Guid personId, [FromBody] NewVaccinationDto newVaccination)
     {
         Guid newGuid = await _sender.Send(
-            new CreateVaccinationCommand(personId, newVaccination.VaccineId, newVaccination.DoseNumber));
+            new CreateVaccinationCommand(
+                personId, 
+                newVaccination.VaccineId, 
+                newVaccination.DoseNumber, 
+                newVaccination.ApplicationDate)
+            );
         
         return Ok(newGuid);
     }

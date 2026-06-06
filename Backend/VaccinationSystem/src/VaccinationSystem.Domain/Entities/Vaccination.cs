@@ -8,7 +8,7 @@ namespace VaccinationSystem.Domain.Entities
         public Guid VaccineId { get; set; }
         public Guid PersonId { get; set; }
         public int DoseNumber { get; set; }
-        public DateTime AppliedAt { get; set; }
+        public DateOnly AppliedAt { get; set; }
 
         public Vaccine? Vaccine { get; set; }
     }

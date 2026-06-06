@@ -14,6 +14,9 @@ namespace VaccinationSystem.Application.Vaccinations.CreateVaccination
 
             RuleFor(x => x.DoseNumber)
                 .GreaterThanOrEqualTo(0);
+
+            RuleFor(x => x.ApplicationDate)
+                .Must(d => d != default);
         }
     }
 }

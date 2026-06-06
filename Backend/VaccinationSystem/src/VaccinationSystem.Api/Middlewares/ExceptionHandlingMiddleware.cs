@@ -67,6 +67,38 @@ namespace VaccinationSystem.Api.Middlewares
                         Message = ex.Message
                     });
             }
+            catch (ConflictException ex)
+            {
+                if (context.Response.HasStarted)
+                    throw;
+
+                // Status 409 e mensagem de erro
+                context.Response.Clear();
+                context.Response.StatusCode = StatusCodes.Status409Conflict;
+
+                await context.Response.WriteAsJsonAsync(
+                    new
+                    {
+                        ErrorCode = 409,
+                        Message = ex.Message
+                    });
+            }
+            catch (UnauthorizedException ex)
+            {
+                if (context.Response.HasStarted)
+                    throw;
+
+                // Status 403 e mensagem de erro
+                context.Response.Clear();
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+
+                await context.Response.WriteAsJsonAsync(
+                    new
+                    {
+                        ErrorCode = 403,
+                        Message = ex.Message
+                    });
+            }
             catch (Exception ex)
             {
                 if (context.Response.HasStarted)

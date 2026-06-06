@@ -1,16 +1,16 @@
 ﻿using FluentValidation.Results;
-using VaccinationSystem.Application.Persons.DeletePerson;
+using VaccinationSystem.Application.Vaccines.DeleteVaccine;
 
-namespace VaccinationSystem.Tests.Application.Persons.DeletePerson
+namespace VaccinationSystem.Tests.Application.Vaccines.DeleteVaccine
 {
-    public class DeletePersonValidatorTests
+    public class DeleteVaccineValidatorTests
     {
         [Fact]
         public void Validate_WhenGuidIsValid_ShouldBeTrue()
         {
             // Arrange
-            DeletePersonValidator validator = new();
-            DeletePersonCommand command = new(Guid.NewGuid());
+            DeleteVaccineValidator validator = new();
+            DeleteVaccineCommand command = new(Guid.NewGuid());
 
             // Act
             ValidationResult result = validator.Validate(command);
@@ -23,8 +23,8 @@ namespace VaccinationSystem.Tests.Application.Persons.DeletePerson
         public void Validate_WhenGuidIsEmpty_ShouldBeFalse()
         {
             // Arrange
-            DeletePersonValidator validator = new();
-            DeletePersonCommand command = new(Guid.Empty);
+            DeleteVaccineValidator validator = new();
+            DeleteVaccineCommand command = new(Guid.Empty);
 
             // Act
             ValidationResult result = validator.Validate(command);

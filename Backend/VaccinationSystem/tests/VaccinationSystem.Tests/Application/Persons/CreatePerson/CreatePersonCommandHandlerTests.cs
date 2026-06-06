@@ -1,6 +1,7 @@
 ﻿using Moq;
 using VaccinationSystem.Application.Common.Interfaces;
 using VaccinationSystem.Application.Persons.CreatePerson;
+using VaccinationSystem.Domain.Aggregates;
 
 namespace VaccinationSystem.Tests.Application.Persons.CreatePerson
 {
@@ -32,6 +33,8 @@ namespace VaccinationSystem.Tests.Application.Persons.CreatePerson
 
             // Assert
             Assert.Equal(Guid.Empty, response);
+
+            _personRepository.Verify(r => r.AddAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Once);
             _unitOfWork.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
     }

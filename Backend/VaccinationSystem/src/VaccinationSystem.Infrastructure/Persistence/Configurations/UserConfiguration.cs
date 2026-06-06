@@ -19,9 +19,6 @@ namespace VaccinationSystem.Infrastructure.Persistence.Configurations
             builder.Property(x => x.Password)
                 .HasMaxLength(255)
                 .IsRequired();
-
-            builder.Property(x => x.Salt)
-                .IsRequired();
         }
     }
 }

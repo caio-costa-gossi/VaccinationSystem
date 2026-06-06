@@ -6,6 +6,8 @@ namespace VaccinationSystem.Application.Common.Interfaces
     {
         Task<Person?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
+        Task<List<Person>> GetAllAsync(CancellationToken cancellationToken);
+
         Task AddAsync(Person person, CancellationToken cancellationToken);
 
         Task DeleteByIdAsync(Guid id, CancellationToken cancellationToken);

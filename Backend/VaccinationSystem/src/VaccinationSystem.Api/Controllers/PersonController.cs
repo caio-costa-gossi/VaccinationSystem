@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using VaccinationSystem.Application.Persons.CreatePerson;
 using VaccinationSystem.Application.Persons.DeletePerson;
 using VaccinationSystem.Application.Persons.GetPerson;
+using VaccinationSystem.Application.Persons.GetPersons;
 using VaccinationSystem.Application.Vaccinations.CreateVaccination;
 using VaccinationSystem.Application.Vaccinations.DeleteVaccination;
+using VaccinationSystem.Application.Vaccines.GetVaccines;
 
 namespace VaccinationSystem.Api.Controllers;
 
@@ -17,6 +19,13 @@ public class PersonController(ISender sender) : ControllerBase
     private readonly ISender _sender = sender;
 
     // Person
+    [HttpGet]
+    public async Task<IActionResult> GetPersons()
+    {
+        List<GetPersonsItemDto> persons = await _sender.Send(new GetPersonsQuery());
+        return Ok(persons);
+    }
+    
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetPersonById(Guid id)
     {

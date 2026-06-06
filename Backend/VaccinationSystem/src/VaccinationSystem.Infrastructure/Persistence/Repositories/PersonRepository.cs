@@ -7,7 +7,13 @@ namespace VaccinationSystem.Infrastructure.Persistence.Repositories
     internal class PersonRepository(AppDbContext appDbContext) : IPersonRepository
     {
         private readonly AppDbContext _appDbContext = appDbContext;
-        
+
+        public async Task<List<Person>> GetAllAsync(CancellationToken cancellationToken)
+        {
+            return await _appDbContext.Persons
+                .ToListAsync(cancellationToken);
+        }
+
         public async Task<Person?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await _appDbContext.Persons

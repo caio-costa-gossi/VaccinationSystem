@@ -7,5 +7,7 @@ namespace VaccinationSystem.Application.Common.Interfaces
         Task<User?> GetByNameAsync(string name, CancellationToken cancellationToken);
 
         Task AddAsync(User user, CancellationToken cancellationToken);
+
+        Task<bool> UserNameExistsAsync(string name, CancellationToken cancellationToken);
     }
 }

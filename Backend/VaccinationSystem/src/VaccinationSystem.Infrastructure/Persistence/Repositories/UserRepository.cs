@@ -19,5 +19,12 @@ namespace VaccinationSystem.Infrastructure.Persistence.Repositories
         {
             await _appDbContext.AddAsync(user, cancellationToken);
         }
+
+        public async Task<bool> UserNameExistsAsync(string name, CancellationToken cancellationToken)
+        {
+            return await _appDbContext.Users
+                .Where(e => e.Name == name)
+                .AnyAsync(cancellationToken);
+        }
     }
 }

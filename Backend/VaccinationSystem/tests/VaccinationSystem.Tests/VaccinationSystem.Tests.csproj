@@ -32,7 +32,6 @@
 
   <ItemGroup>
     <Folder Include="Application\Vaccines\" />
-    <Folder Include="Application\Vaccinations\" />
   </ItemGroup>
 
 </Project>

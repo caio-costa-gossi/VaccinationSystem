@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VaccinationSystem.Application.Persons.CreatePerson;
 using VaccinationSystem.Application.Persons.DeletePerson;
@@ -10,6 +11,7 @@ namespace VaccinationSystem.Api.Controllers;
 
 [ApiController]
 [Route("api/persons")]
+[Authorize]
 public class PersonController(ISender sender) : ControllerBase
 {
     private readonly ISender _sender = sender;

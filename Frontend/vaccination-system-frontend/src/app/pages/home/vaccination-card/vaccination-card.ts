@@ -34,6 +34,7 @@ export class VaccinationCard implements OnInit, OnChanges {
   vaccinations: Vaccination[] = [];
 
   selectedDose: DoseManagementDto | null = null;
+  doseNumbers: number[] = [];
 
   showDeletePersonModal: boolean = false;
   showRegisterVaccinationModal: boolean = false;
@@ -62,8 +63,10 @@ export class VaccinationCard implements OnInit, OnChanges {
     this.personService.getById(this.personId).subscribe({
       next: (data) => {
         this.person = data;
+
         this.vaccinations = this.mapVaccinations(this.person.vaccinations);
         this.vaccinations.forEach(v => v.appliedDoses.sort((a,b) => a.doseNumber - b.doseNumber));
+        this.updateDoseNumbers();
 
         this.isLoading.set(false);
       },
@@ -144,7 +147,13 @@ export class VaccinationCard implements OnInit, OnChanges {
     });
   }
 
-  mapVaccinations(data: GetVaccinationDto[]): Vaccination[] {
+  getDoseHelper(vaccination: Vaccination, doseNumber: number): Dose | undefined {
+    return vaccination.appliedDoses.find(
+      d => d.doseNumber === doseNumber
+    );
+  }
+
+  private mapVaccinations(data: GetVaccinationDto[]): Vaccination[] {
     const map = new Map<string, Vaccination>();
 
     for (const item of data) {
@@ -166,5 +175,19 @@ export class VaccinationCard implements OnInit, OnChanges {
     }
 
     return Array.from(map.values());
+  }
+
+  private updateDoseNumbers(): void {
+    const maxDose = Math.max(
+      0,
+      ...this.vaccinations.flatMap(v =>
+        v.appliedDoses.map(d => d.doseNumber)
+      )
+    );
+
+    this.doseNumbers = Array.from(
+      { length: maxDose },
+      (_, i) => i + 1
+    );
   }
 }

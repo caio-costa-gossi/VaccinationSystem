@@ -112,6 +112,10 @@ export class VaccinationCard implements OnInit, OnChanges {
       },
       error: (err) => {
         console.error('Post failed', err);
+
+        if (err.error.message)
+          alert(err.error.message);
+
         this.isLoading.set(false);
       }
     });

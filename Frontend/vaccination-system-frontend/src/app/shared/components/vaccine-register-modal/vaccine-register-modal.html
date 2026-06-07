@@ -3,5 +3,5 @@
 
   <input [(ngModel)]="vaccineName" placeholder="Vaccine name" />
 
-  <button (click)="submit()">Salvar</button>
+  <button (click)="submit()" [disabled]="!allFieldsValid()">Salvar</button>
 </app-modal>

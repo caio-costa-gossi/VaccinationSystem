@@ -22,4 +22,8 @@ export class PersonModal {
   onClose() {
     this.closeEvent.emit();
   }
+
+  allFieldsValid(): boolean {
+    return !!this.name && this.name.trim() !== '';
+  }
 }

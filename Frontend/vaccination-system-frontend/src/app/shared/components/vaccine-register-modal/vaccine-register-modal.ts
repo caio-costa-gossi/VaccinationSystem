@@ -23,4 +23,8 @@ export class VaccineRegisterModal {
   onClose() {
     this.closeEvent.emit();
   }
+
+  allFieldsValid(): boolean {
+    return !!this.vaccineName && this.vaccineName.trim() !== '';
+  }
 }

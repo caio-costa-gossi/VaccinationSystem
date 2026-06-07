@@ -3,5 +3,5 @@
 
   <input [(ngModel)]="name" placeholder="Nome do paciente" />
 
-  <button (click)="submit()">Salvar</button>
+  <button (click)="submit()" [disabled]="!allFieldsValid()">Salvar</button>
 </app-modal>

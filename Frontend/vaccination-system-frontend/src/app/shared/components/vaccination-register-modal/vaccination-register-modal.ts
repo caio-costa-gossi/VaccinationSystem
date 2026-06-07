@@ -63,4 +63,11 @@ export class VaccinationRegisterModal implements OnInit {
   onClose() {
     this.closeEvent.emit();
   }
+
+  allFieldsValid(): boolean {
+    return (!!this.selectedVaccineId
+    && this.doseNumber != null
+    && !!this.applicationDate) &&
+    this.doseNumber > 0;
+  }
 }

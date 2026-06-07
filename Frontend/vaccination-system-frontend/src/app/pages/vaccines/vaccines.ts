@@ -1,28 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { GetVaccinesItemDto } from '../../api/vaccine/vaccine.type';
 import { VaccineRegisterModal } from '../../shared/components/vaccine-register-modal/vaccine-register-modal';
+import { VaccineService } from '../../api/vaccine/vaccine.service';
+import { Spinner } from '../../shared/components/spinner/spinner';
 
 @Component({
   selector: 'app-vaccines',
-  imports: [VaccineRegisterModal],
+  imports: [VaccineRegisterModal, Spinner],
   templateUrl: './vaccines.html',
   styleUrl: './vaccines.css',
 })
-export class Vaccines {
-  vaccines: GetVaccinesItemDto[];
+export class Vaccines implements OnInit {
+  vaccines: GetVaccinesItemDto[] = [];
   showVaccineModal: boolean = false;
 
-  constructor() {
-    this.vaccines = [
-      {
-        id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f',
-        name: 'Vacina 1'
+  isLoading = signal(false);
+
+  constructor(private vaccineService: VaccineService) {}
+
+  ngOnInit(): void {
+    this.loadVaccines();
+  }
+
+  loadVaccines() {
+    this.isLoading.set(true);
+    
+    this.vaccineService.getAll().subscribe({
+      next: (data) => {
+        this.vaccines = data;
+        console.log(this.vaccines);
+        this.isLoading.set(false);
       },
-      {
-        id: 'e8b79d52-cd76-49ef-a710-a6d6b4e8dfcf',
-        name: 'Vacina 2'
+      error: (err) => {
+        console.error('Fetch failed', err);
+        this.isLoading.set(false);
       }
-    ];
+    });
   }
 
   onVaccineClick(vaccineId: string) {

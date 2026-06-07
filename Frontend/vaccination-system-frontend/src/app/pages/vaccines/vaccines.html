@@ -17,3 +17,7 @@
         (closeEvent)="showVaccineModal = false">
     </app-vaccine-register-modal>
 }
+
+@if (isLoading()) {
+    <app-spinner></app-spinner>
+}

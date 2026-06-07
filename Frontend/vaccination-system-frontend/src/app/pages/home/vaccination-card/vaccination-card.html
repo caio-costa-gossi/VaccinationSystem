@@ -1,1 +1,6 @@
-<p>Hello {{ person }}</p>
+<p>Hello {{ personId }}</p>
+
+<p>Total de vacinas: {{ person.vaccines.length }}</p>
+
+<button type="submit" (click)="onDeletePerson()">Excluir paciente</button>
+<button type="submit" (click)="onRegisterVaccination()">Cadastrar vacinação</button>

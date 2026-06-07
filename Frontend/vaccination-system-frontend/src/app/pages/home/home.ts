@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { VaccinationCard } from './vaccination-card/vaccination-card';
+import { GetPersonsItemDto } from '../../api/person/person.type';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,14 @@ import { VaccinationCard } from './vaccination-card/vaccination-card';
   styleUrl: './home.css',
 })
 export class Home {
-  people = ['Ana', 'Bruno', 'Carlos', 'Daniela'];
-  selectedPerson: string | null = null;
+  people: GetPersonsItemDto[] = [
+    {name: 'João', id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f'},
+    {name: 'Bruno', id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f'},
+    {name: 'Carlos', id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f'},
+    {name: 'Daniela', id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f'}
+  ];
+  
+  selectedPersonId: string | null = null;
 
   onSelect(event: EventTarget | null) {
     let htmlEvent = event as HTMLSelectElement;
@@ -17,6 +24,6 @@ export class Home {
     if (!htmlEvent)
       return;
     
-    this.selectedPerson = htmlEvent.value;
+    this.selectedPersonId = htmlEvent.value;
   }
 }

@@ -6,16 +6,16 @@
   <option value="">-- selecione --</option>
 
   @for (person of people; track person) {
-    <option [value]="person">
-        {{ person }}
+    <option [value]="person.id">
+        {{ person.name }}
     </option>
   }
 </select>
 
 <hr />
 
-@if (selectedPerson) {
+@if (selectedPersonId) {
   <app-vaccination-card
-    [person]="selectedPerson">
+    [personId]="selectedPersonId">
   </app-vaccination-card>
 }

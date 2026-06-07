@@ -1,6 +1,5 @@
-<p>Hello {{ personId }}</p>
-
-<p>Total de vacinas: {{ person.vaccinations.length }}</p>
+<p>Nome: {{ person.name }}</p>
+<p>Total de vacinas: {{ vaccinations.length }}</p>
 
 @for (vaccination of vaccinations; track vaccination.vaccineId) {
   <div>
@@ -17,4 +16,4 @@
 }
 
 <button type="submit" (click)="onDeletePerson()">Excluir paciente</button>
-<button type="submit" (click)="onRegisterVaccination()">Cadastrar vacinação</button>
+<button type="submit" (click)="onRegisterVaccination()">Cadastrar nova vacinação</button>

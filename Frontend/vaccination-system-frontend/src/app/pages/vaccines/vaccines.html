@@ -1,0 +1,13 @@
+<h2>Administração de vacinas</h2>
+
+<p>Vacinas cadastradas:</p>
+
+<ul>
+    @for (vaccine of vaccines; track vaccine.id) {
+        <li class="clickable" (click)="onVaccineClick(vaccine.id)">
+        Nome: {{ vaccine.name }}
+        </li>
+    }
+</ul>
+
+<button type="submit" (click)="onRegisterVaccine()">Cadastrar nova vacina</button>

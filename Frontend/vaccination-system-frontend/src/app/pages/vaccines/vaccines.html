@@ -4,7 +4,7 @@
 
 <ul>
     @for (vaccine of vaccines; track vaccine.id) {
-        <li class="clickable" (click)="onVaccineClick(vaccine.id)">
+        <li class="clickable" (click)="onVaccineClick(vaccine)">
         Nome: {{ vaccine.name }}
         </li>
     }
@@ -12,11 +12,19 @@
 
 <button type="submit" (click)="onRegisterVaccine()">Cadastrar nova vacina</button>
 
-@if (showVaccineModal) {
+@if (showVaccineRegisterModal) {
     <app-vaccine-register-modal
-        (closeEvent)="showVaccineModal = false"
+        (closeEvent)="showVaccineRegisterModal = false"
         (confirmRegisterEvent)="onConfirmRegisterVaccine($event)">
     </app-vaccine-register-modal>
+}
+
+@if (showVaccineManagementModal) {
+    <app-vaccine-management-modal
+        (closeEvent)="showVaccineManagementModal = false"
+        (confirmVaccineDeletion)="onConfirmDeleteVaccine($event)"
+        [vaccine]="selectedVaccine">
+    </app-vaccine-management-modal>
 }
 
 @if (isLoading()) {

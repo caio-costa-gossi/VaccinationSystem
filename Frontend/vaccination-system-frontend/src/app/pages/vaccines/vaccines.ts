@@ -3,16 +3,20 @@ import { GetVaccinesItemDto } from '../../api/vaccine/vaccine.type';
 import { VaccineRegisterModal } from '../../shared/components/vaccine-register-modal/vaccine-register-modal';
 import { VaccineService } from '../../api/vaccine/vaccine.service';
 import { Spinner } from '../../shared/components/spinner/spinner';
+import { VaccineManagementModal } from '../../shared/components/vaccine-management-modal/vaccine-management-modal';
 
 @Component({
   selector: 'app-vaccines',
-  imports: [VaccineRegisterModal, Spinner],
+  imports: [VaccineRegisterModal, VaccineManagementModal, Spinner],
   templateUrl: './vaccines.html',
   styleUrl: './vaccines.css',
 })
 export class Vaccines implements OnInit {
   vaccines: GetVaccinesItemDto[] = [];
-  showVaccineModal: boolean = false;
+  selectedVaccine: GetVaccinesItemDto | null = null;
+  
+  showVaccineRegisterModal: boolean = false;
+  showVaccineManagementModal: boolean = false;
 
   isLoading = signal(false);
 
@@ -37,12 +41,17 @@ export class Vaccines implements OnInit {
     });
   }
 
-  onVaccineClick(vaccineId: string) {
-    console.log(`Manage vaccine with ID ${vaccineId}`);
+  onVaccineClick(vaccine: GetVaccinesItemDto) {
+    this.showVaccineManagementModal = true;
+    this.selectedVaccine = vaccine;
+  }
+
+  onConfirmDeleteVaccine(vaccineId: string) {
+
   }
 
   onRegisterVaccine() {
-    this.showVaccineModal = true;
+    this.showVaccineRegisterModal = true;
   }
 
   onConfirmRegisterVaccine(vaccineName: string) {

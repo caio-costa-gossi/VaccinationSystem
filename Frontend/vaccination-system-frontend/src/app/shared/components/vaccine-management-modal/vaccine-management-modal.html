@@ -1,0 +1,20 @@
+<app-modal (closeEvent)="onClose()">
+
+  <h2>Gerenciamento de vacina cadastrada</h2>
+
+  <div>
+    <strong>Vacina:</strong>
+    {{ vaccine!.name }}
+  </div>
+
+  <hr>
+
+  <button type="button" (click)="onDeleteVaccine()">
+    Excluir vacina
+  </button>
+
+  <button type="button" (click)="onClose()">
+    Cancelar
+  </button>
+
+</app-modal>

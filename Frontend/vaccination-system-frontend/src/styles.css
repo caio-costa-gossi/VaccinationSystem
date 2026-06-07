@@ -1,1 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+/* ===== Base reset ===== */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #f7f8fc;
+  color: #1f2430;
+}
+
+body {
+  padding: 8px 24px;
+}
+
+/* ===== Layout spacing ===== */
+main, .container {
+  padding: 24px;
+}
+
+h1, h2, h3 {
+  margin: 0 0 16px 0;
+}
+
+/* ===== Cards / blocks ===== */
+.card, .modal, .box {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(20, 20, 40, 0.08);
+}
+
+/* ===== Buttons ===== */
+button {
+  background: #7c5cff;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  margin: 0 12px 0 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: transform 0.1s ease, opacity 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===== Inputs and input blocks ===== */
+input, select {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 12px;
+  margin: 8px 0 16px 0;
+  border-radius: 10px;
+  border: 1px solid #e2e6f3;
+  outline: none;
+  background: #fff;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+label {
+  font-weight: 500;
+  color: #2f3446;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}

@@ -19,9 +19,13 @@
   top: 8px;
   right: 8px;
 
+  margin: 0px 0px 25px 25px;
+
   border: none;
   background: transparent;
 
   font-size: 20px;
   cursor: pointer;
+
+  color: #1f2430;
 }

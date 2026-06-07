@@ -37,3 +37,7 @@
     [dose]="selectedDose">
   </app-dose-management-modal>
 }
+
+@if (isLoading()) {
+  <app-spinner></app-spinner>
+}

@@ -3,7 +3,6 @@ import { VaccinationCard } from './vaccination-card/vaccination-card';
 import { GetPersonsItemDto } from '../../api/person/person.type';
 import { PersonModal } from '../../shared/components/person-modal/person-modal';
 import { PersonService } from '../../api/person/person.service';
-import { firstValueFrom } from 'rxjs';
 import { Spinner } from '../../shared/components/spinner/spinner';
 
 @Component({

@@ -7,7 +7,7 @@
 
     <ul>
       @for (dose of vaccination.appliedDoses; track dose.doseNumber) {
-        <li class="clickable" (click)="onDoseClick(dose.vaccinationId)">
+        <li class="clickable" (click)="onDoseClick(dose, vaccination.vaccineName)">
           Dose {{ dose.doseNumber }} - {{ dose.appliedAt }}
         </li>
       }
@@ -29,4 +29,11 @@
     (closeEvent)="showDeletePersonModal = false"
     (confirm)="onConfirmDeletion($event)">
   </app-confirm-modal>
+}
+
+@if (showDoseManagementModal) {
+  <app-dose-management-modal
+    (closeEvent)="showDoseManagementModal = false" 
+    [dose]="selectedDose">
+  </app-dose-management-modal>
 }

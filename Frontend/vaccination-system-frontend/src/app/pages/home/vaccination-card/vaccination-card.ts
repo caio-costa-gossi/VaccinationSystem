@@ -3,20 +3,23 @@ import { GetPersonDto } from '../../../api/person/person.type';
 import { GetVaccinationDto } from '../../../api/vaccination/vaccination.type';
 import { VaccinationRegisterModal } from '../../../shared/components/vaccination-register-modal/vaccination-register-modal';
 import { ConfirmModal } from '../../../shared/components/confirm-modal/confirm-modal';
+import { DoseManagementDto, DoseManagementModal } from '../../../shared/components/dose-management-modal/dose-management-modal';
+
+type Dose = {
+    vaccinationId: string;
+    doseNumber: number;
+    appliedAt: string;
+};
 
 type Vaccination = {
   vaccineId: string;
   vaccineName: string;
-  appliedDoses: {
-    vaccinationId: string;
-    doseNumber: number;
-    appliedAt: string;
-  }[];
+  appliedDoses: Dose[];
 };
 
 @Component({
   selector: 'app-vaccination-card',
-  imports: [VaccinationRegisterModal, ConfirmModal],
+  imports: [VaccinationRegisterModal, ConfirmModal, DoseManagementModal],
   templateUrl: './vaccination-card.html',
   styleUrl: './vaccination-card.css',
 })
@@ -27,8 +30,11 @@ export class VaccinationCard {
   person: GetPersonDto;
   vaccinations: Vaccination[] = [];
 
+  selectedDose: DoseManagementDto | null = null;
+
   showDeletePersonModal: boolean = false;
   showRegisterVaccinationModal: boolean = false;
+  showDoseManagementModal: boolean = false;
 
   constructor() {
     this.person = {
@@ -84,8 +90,15 @@ export class VaccinationCard {
     this.showRegisterVaccinationModal = true;
   }
 
-  onDoseClick(vaccinationId: string) {
-    console.log(`Manage dose with ID: ${vaccinationId}`);
+  onDoseClick(dose: Dose, vaccineName: string) {
+    this.selectedDose = {
+      vaccineName: vaccineName,
+      vaccinationId: dose.vaccinationId, 
+      doseNumber: dose.doseNumber, 
+      appliedAt: dose.appliedAt
+    };
+
+    this.showDoseManagementModal = true;
   }
 
   mapVaccinations(data: GetVaccinationDto[]): Vaccination[] {

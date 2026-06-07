@@ -1,0 +1,30 @@
+<app-modal (closeEvent)="onClose()">
+
+  <h2>Gerenciamento de Dose</h2>
+
+  <div>
+    <strong>Vacina:</strong>
+    {{ dose!.vaccineName }}
+  </div>
+
+  <div>
+    <strong>Número da dose:</strong>
+    {{ dose!.doseNumber }}
+  </div>
+
+  <div>
+    <strong>Data de aplicação:</strong>
+    {{ dose!.appliedAt }}
+  </div>
+
+  <hr>
+
+  <button type="button" (click)="onDeleteDose()">
+    Excluir dose
+  </button>
+
+  <button type="button" (click)="onClose()">
+    Cancelar
+  </button>
+
+</app-modal>

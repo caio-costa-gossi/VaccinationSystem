@@ -1,1 +1,21 @@
-<p>main works!</p>
+<h2>Main Page</h2>
+
+<label for="person">Selecione uma pessoa:</label>
+
+<select id="person" (change)="onSelect($event.target)">
+  <option value="">-- selecione --</option>
+
+  @for (person of people; track person) {
+    <option [value]="person">
+        {{ person }}
+    </option>
+  }
+</select>
+
+<hr />
+
+@if (selectedPerson) {
+  <app-vaccination-card
+    [person]="selectedPerson">
+  </app-vaccination-card>
+}

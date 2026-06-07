@@ -8,5 +8,5 @@ export interface GetPersonsItemDto {
 export interface GetPersonDto {
     id: string,
     name: string,
-    vaccines: GetVaccinationDto[]
+    vaccinations: GetVaccinationDto[]
 }

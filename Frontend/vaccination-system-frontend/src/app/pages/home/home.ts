@@ -15,7 +15,7 @@ export class Home {
     {name: 'Carlos', id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f'},
     {name: 'Daniela', id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f'}
   ];
-  
+
   selectedPersonId: string | null = null;
 
   onSelect(event: EventTarget | null) {
@@ -25,5 +25,9 @@ export class Home {
       return;
     
     this.selectedPersonId = htmlEvent.value;
+  }
+
+  onRegisterPerson() {
+    console.log('Person registered!');
   }
 }

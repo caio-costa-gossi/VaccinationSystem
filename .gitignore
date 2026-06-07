@@ -3,6 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# BACKEND
+
 # SQLite execution artifacts
 *.db-wal
 *.db-shm
@@ -403,3 +405,43 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+
+# FRONTEND
+# Compiled output
+/Frontend/vaccination-system-frontend/dist
+/Frontend/vaccination-system-frontend/tmp
+/Frontend/vaccination-system-frontend/out-tsc
+/Frontend/vaccination-system-frontend/bazel-out
+
+# Node
+/Frontend/vaccination-system-frontend/node_modules
+/Frontend/vaccination-system-frontend/npm-debug.log
+/Frontend/vaccination-system-frontend/yarn-error.log
+
+# IDEs and editors
+/Frontend/vaccination-system-frontend/.idea/
+/Frontend/vaccination-system-frontend/.project
+/Frontend/vaccination-system-frontend/.classpath
+/Frontend/vaccination-system-frontend/.c9/
+*.launch
+/Frontend/vaccination-system-frontend/.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+/Frontend/vaccination-system-frontend/.vscode/*
+/Frontend/vaccination-system-frontend/.history/*
+
+# Miscellaneous
+/Frontend/vaccination-system-frontend/.angular/cache
+/Frontend/vaccination-system-frontend/.sass-cache/
+/Frontend/vaccination-system-frontend/connect.lock
+/Frontend/vaccination-system-frontend/coverage
+/Frontend/vaccination-system-frontend/libpeerconnection.log
+/Frontend/vaccination-system-frontend/testem.log
+/Frontend/vaccination-system-frontend/typings
+/Frontend/vaccination-system-frontend/__screenshots__/
+
+# System files
+.DS_Store
+Thumbs.db

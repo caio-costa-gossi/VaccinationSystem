@@ -13,3 +13,15 @@
   padding: 16px;
   min-width: 300px;
 }
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  border: none;
+  background: transparent;
+
+  font-size: 20px;
+  cursor: pointer;
+}

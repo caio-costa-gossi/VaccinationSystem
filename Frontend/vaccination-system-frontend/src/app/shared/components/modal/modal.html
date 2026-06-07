@@ -1,5 +1,12 @@
 <div class="backdrop" (click)="close()"></div>
 
 <div class="modal">
+  <button
+    type="button"
+    class="close-button"
+    (click)="close()">
+    X
+  </button>
+  
   <ng-content></ng-content>
 </div>

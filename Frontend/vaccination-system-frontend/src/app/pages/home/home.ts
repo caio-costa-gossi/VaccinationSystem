@@ -40,6 +40,18 @@ export class Home implements OnInit {
     });
   }
 
+  registerPerson(name: string) {
+    this.personService.create(name).subscribe({
+      next: (data) => {
+        this.loadPersons();
+      },
+      error: (err) => {
+        console.error('Fetch failed', err);
+        this.isLoading.set(false);
+      }
+    });
+  }
+
   onSelect(event: EventTarget | null) {
     let htmlEvent = event as HTMLSelectElement;
     

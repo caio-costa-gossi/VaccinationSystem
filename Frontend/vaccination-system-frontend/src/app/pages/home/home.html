@@ -25,7 +25,8 @@
 
 @if (showRegisterPersonModal) {
   <app-person-modal
-    (closeEvent)="showRegisterPersonModal = false">
+    (closeEvent)="showRegisterPersonModal = false"
+    (confirmRegisterEvent)="registerPerson($event)">
   </app-person-modal>
 }
 

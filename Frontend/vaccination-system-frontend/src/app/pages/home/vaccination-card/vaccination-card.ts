@@ -33,6 +33,7 @@ export class VaccinationCard implements OnInit {
   vaccinations: Vaccination[] = [];
 
   selectedDose: DoseManagementDto | null = null;
+  newPerson: string = '';
 
   showDeletePersonModal: boolean = false;
   showRegisterVaccinationModal: boolean = false;
@@ -65,11 +66,12 @@ export class VaccinationCard implements OnInit {
   }
 
   onConfirmDeletion(confirm: boolean) {
-    if (confirm)
-      console.log('Person deleted!');
-
     this.showDeletePersonModal = false;
-    this.personDeleted.emit();
+    
+    if (confirm) {
+      this.personDeleted.emit();
+      console.log('Person deleted!');
+    }
   }
 
   onRegisterVaccination() {

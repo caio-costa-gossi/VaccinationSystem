@@ -20,17 +20,13 @@ export class Login {
   ) {}
   
   async submit() {
-    console.log('Hello login!');
-    console.log(this.username);
-    console.log(this.password);
-
     try {
       const res: any = await firstValueFrom(
         this.authService.login(this.username, this.password)
       );
 
-      localStorage.setItem('token', res.token);
-      this.router.navigate(['/main']);
+      localStorage.setItem('token', res.accessToken);
+      this.router.navigate(['/home']);
 
     } 
     catch (err) {

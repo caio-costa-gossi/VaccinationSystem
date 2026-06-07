@@ -21,11 +21,15 @@ export class DoseManagementModal {
   @Output()
   closeEvent = new EventEmitter<void>();
 
+  @Output()
+  confirmDoseDeletion = new EventEmitter<string>();
+
   onClose() {
     this.closeEvent.emit();
   }
   
   onDeleteDose() {
-    console.log("Dose deleted!");
+    this.confirmDoseDeletion.emit(this.dose!.vaccinationId);
+    this.closeEvent.emit();
   }
 }

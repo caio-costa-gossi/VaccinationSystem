@@ -28,13 +28,14 @@
 @if (showDeletePersonModal) {
   <app-confirm-modal
     (closeEvent)="showDeletePersonModal = false"
-    (confirm)="onConfirmDeletion($event)">
+    (confirm)="onConfirmPersonDeletion($event)">
   </app-confirm-modal>
 }
 
 @if (showDoseManagementModal) {
   <app-dose-management-modal
     (closeEvent)="showDoseManagementModal = false" 
+    (confirmDoseDeletion)="onConfirmDoseDeletion($event)"
     [dose]="selectedDose">
   </app-dose-management-modal>
 }

@@ -78,7 +78,7 @@ export class VaccinationCard implements OnInit, OnChanges {
     this.showDeletePersonModal = true;
   }
 
-  onConfirmDeletion(confirm: boolean) {
+  onConfirmPersonDeletion(confirm: boolean) {
     this.showDeletePersonModal = false;
     
     if (!confirm)
@@ -126,6 +126,18 @@ export class VaccinationCard implements OnInit, OnChanges {
     };
 
     this.showDoseManagementModal = true;
+  }
+
+  onConfirmDoseDeletion(vaccinationId: string) {
+    this.vaccinationService.delete(this.personId, vaccinationId).subscribe({
+      next: (data) => {
+        this.loadPerson();
+      },
+      error: (err) => {
+        console.error('Delete failed', err);
+        this.isLoading.set(false);
+      }
+    });
   }
 
   mapVaccinations(data: GetVaccinationDto[]): Vaccination[] {

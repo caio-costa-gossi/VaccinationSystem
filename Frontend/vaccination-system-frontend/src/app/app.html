@@ -1,6 +1,12 @@
 <nav class="top-bar">
-  <a routerLink="/home" routerLinkActive="active-link">Home</a>
-  <a routerLink="/vaccines" routerLinkActive="active-link">Vacinas</a>
+  <div class="nav-left">
+    <a routerLink="/home" routerLinkActive="active-link">Home</a>
+    <a routerLink="/vaccines" routerLinkActive="active-link">Vacinas</a>
+  </div>
+
+  <div class="nav-right">
+    <a routerLink="/login" routerLinkActive="active-link">Login</a>
+  </div>
 </nav>
 
 <router-outlet />

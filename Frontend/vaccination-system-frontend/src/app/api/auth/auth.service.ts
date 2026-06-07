@@ -13,4 +13,11 @@ export class AuthService {
       password: password
     });
   } 
+
+  register(username: string, password: string) {
+    return this.http.post(`${this.baseUrl}/auth/register`, {
+      name: username,
+      password: password
+    });
+  } 
 }

@@ -1,0 +1,50 @@
+<div class="register-container">
+
+  <h1>Nova conta</h1>
+
+  <p>Por favor, preencha os dados abaixo para criar uma conta</p>
+
+  <form (submit)="submit(); $event.preventDefault()">
+
+    <div class="form-group">
+      <label for="username">Usuário</label>
+      <input
+        id="username"
+        type="text"
+        name="username"
+        [(ngModel)]="username"
+        placeholder="Digite o usuário"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="Digite a senha"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirmação de senha</label>
+      <input
+        id="confirmPassword"
+        type="password"
+        name="confirmPassword"
+        [(ngModel)]="confirmPassword"
+        placeholder="Confirme a senha"
+      />
+    </div>
+
+    <button type="submit">Cadastrar</button>
+
+  </form>
+
+  @if(isLoading()) {
+    <app-spinner></app-spinner>
+  }
+
+</div>

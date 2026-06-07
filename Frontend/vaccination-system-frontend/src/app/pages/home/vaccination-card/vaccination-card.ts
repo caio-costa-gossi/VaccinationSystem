@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, signal, SimpleChanges } from '@angular/core';
 import { GetPersonDto } from '../../../api/person/person.type';
 import { GetVaccinationDto } from '../../../api/vaccination/vaccination.type';
 import { VaccinationRegisterModal } from '../../../shared/components/vaccination-register-modal/vaccination-register-modal';
@@ -25,7 +25,7 @@ type Vaccination = {
   templateUrl: './vaccination-card.html',
   styleUrl: './vaccination-card.css',
 })
-export class VaccinationCard implements OnInit {
+export class VaccinationCard implements OnInit, OnChanges {
   @Input() personId!: string;
   @Output() personDeleted = new EventEmitter<void>();
 
@@ -44,6 +44,16 @@ export class VaccinationCard implements OnInit {
   constructor(private personService: PersonService) {}
 
   ngOnInit(): void {
+    this.loadPerson();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['personId']) {
+      this.loadPerson();
+    }
+  }
+
+  loadPerson() {
     this.isLoading.set(true);
       
     this.personService.getById(this.personId).subscribe({

@@ -47,7 +47,15 @@ export class Vaccines implements OnInit {
   }
 
   onConfirmDeleteVaccine(vaccineId: string) {
-
+    this.vaccineService.delete(vaccineId).subscribe({
+      next: (data) => {
+        this.loadVaccines();
+      },
+      error: (err) => {
+        console.error('Delete failed', err);
+        this.isLoading.set(false);
+      }
+    });
   }
 
   onRegisterVaccine() {

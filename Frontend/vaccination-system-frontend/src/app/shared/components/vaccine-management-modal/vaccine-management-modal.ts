@@ -19,6 +19,7 @@ export class VaccineManagementModal {
   confirmVaccineDeletion = new EventEmitter<string>();
 
   onDeleteVaccine() {
+    this.confirmVaccineDeletion.emit(this.vaccine!.id);
     this.closeEvent.emit();
   }
 

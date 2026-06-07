@@ -11,3 +11,9 @@
 </ul>
 
 <button type="submit" (click)="onRegisterVaccine()">Cadastrar nova vacina</button>
+
+@if (showVaccineModal) {
+    <app-vaccine-register-modal
+        (closeEvent)="showVaccineModal = false">
+    </app-vaccine-register-modal>
+}

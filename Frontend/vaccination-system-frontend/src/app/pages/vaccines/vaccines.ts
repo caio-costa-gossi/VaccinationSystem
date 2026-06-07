@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { GetVaccinesItemDto } from '../../api/vaccine/vaccine.type';
+import { VaccineRegisterModal } from '../../shared/components/vaccine-register-modal/vaccine-register-modal';
 
 @Component({
   selector: 'app-vaccines',
-  imports: [],
+  imports: [VaccineRegisterModal],
   templateUrl: './vaccines.html',
   styleUrl: './vaccines.css',
 })
 export class Vaccines {
   vaccines: GetVaccinesItemDto[];
+  showVaccineModal: boolean = false;
 
   constructor() {
     this.vaccines = [
@@ -29,5 +31,6 @@ export class Vaccines {
 
   onRegisterVaccine() {
     console.log('Register vaccine');
+    this.showVaccineModal = true;
   }
 }

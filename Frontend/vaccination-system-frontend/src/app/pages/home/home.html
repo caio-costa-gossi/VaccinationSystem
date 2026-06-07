@@ -16,10 +16,17 @@
 
 @if (selectedPersonId) {
   <app-vaccination-card
-    [personId]="selectedPersonId">
+    [personId]="selectedPersonId"
+    (personDeleted)="onPersonDeleted()">
   </app-vaccination-card>
 
   <hr />
+}
+
+@if (showRegisterPersonModal) {
+  <app-person-modal
+    (closeEvent)="showRegisterPersonModal = false">
+  </app-person-modal>
 }
 
 <button type="submit" (click)="onRegisterPerson()">Cadastrar novo paciente</button>

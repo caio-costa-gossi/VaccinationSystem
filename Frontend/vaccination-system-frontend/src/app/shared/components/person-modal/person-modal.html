@@ -1,0 +1,7 @@
+<app-modal (closeEvent)="onClose()">
+  <h3>Cadastrar novo paciente</h3>
+
+  <input [(ngModel)]="name" placeholder="Person name" />
+
+  <button (click)="submit()">Salvar</button>
+</app-modal>

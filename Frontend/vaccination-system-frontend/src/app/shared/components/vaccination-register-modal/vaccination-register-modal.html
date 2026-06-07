@@ -1,0 +1,16 @@
+<app-modal (closeEvent)="onClose()">
+  <h3>Registrar dose de vacina</h3>
+
+  <select [(ngModel)]="selectedVaccineId">
+    <option value="">Selecione a vacina</option>
+    @for (v of vaccines; track v.id) {
+      <option [value]="v.id">{{ v.name }}</option>
+    }
+  </select>
+
+  <input type="number" [(ngModel)]="doseNumber" placeholder="Número da dose" />
+
+  <input type="date" [(ngModel)]="applicationDate" />
+
+  <button (click)="submit()">Salvar</button>
+</app-modal>

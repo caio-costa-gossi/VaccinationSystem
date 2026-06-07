@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { VaccinationCard } from './vaccination-card/vaccination-card';
 import { GetPersonsItemDto } from '../../api/person/person.type';
+import { PersonModal } from '../../shared/components/person-modal/person-modal';
 
 @Component({
   selector: 'app-home',
-  imports: [VaccinationCard],
+  imports: [VaccinationCard, PersonModal],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -18,6 +19,8 @@ export class Home {
 
   selectedPersonId: string | null = null;
 
+  showRegisterPersonModal: boolean = false;
+
   onSelect(event: EventTarget | null) {
     let htmlEvent = event as HTMLSelectElement;
     
@@ -28,6 +31,10 @@ export class Home {
   }
 
   onRegisterPerson() {
-    console.log('Person registered!');
+    this.showRegisterPersonModal = true;
+  }
+
+  onPersonDeleted() {
+    this.selectedPersonId = null;
   }
 }

@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GetPersonDto } from '../../../api/person/person.type';
 import { GetVaccinationDto } from '../../../api/vaccination/vaccination.type';
+import { VaccinationRegisterModal } from '../../../shared/components/vaccination-register-modal/vaccination-register-modal';
+import { ConfirmModal } from '../../../shared/components/confirm-modal/confirm-modal';
 
 type Vaccination = {
   vaccineId: string;
@@ -14,15 +16,19 @@ type Vaccination = {
 
 @Component({
   selector: 'app-vaccination-card',
-  imports: [],
+  imports: [VaccinationRegisterModal, ConfirmModal],
   templateUrl: './vaccination-card.html',
   styleUrl: './vaccination-card.css',
 })
 export class VaccinationCard {
   @Input() personId!: string;
+  @Output() personDeleted = new EventEmitter<void>();
 
   person: GetPersonDto;
   vaccinations: Vaccination[] = [];
+
+  showDeletePersonModal: boolean = false;
+  showRegisterVaccinationModal: boolean = false;
 
   constructor() {
     this.person = {
@@ -63,12 +69,19 @@ export class VaccinationCard {
   }
 
   onDeletePerson() {
-    console.log('Person deleted!');
-    console.log(this.vaccinations);
+    this.showDeletePersonModal = true;
+  }
+
+  onConfirmDeletion(confirm: boolean) {
+    if (confirm)
+      console.log('Person deleted!');
+
+    this.showDeletePersonModal = false;
+    this.personDeleted.emit();
   }
 
   onRegisterVaccination() {
-    console.log('Vaccination registered!');
+    this.showRegisterVaccinationModal = true;
   }
 
   onDoseClick(vaccinationId: string) {

@@ -17,3 +17,16 @@
 
 <button type="submit" (click)="onDeletePerson()">Excluir paciente</button>
 <button type="submit" (click)="onRegisterVaccination()">Cadastrar nova vacinação</button>
+
+@if (showRegisterVaccinationModal) {
+  <app-vaccination-register-modal
+    (closeEvent)="showRegisterVaccinationModal = false">
+  </app-vaccination-register-modal>
+}
+
+@if (showDeletePersonModal) {
+  <app-confirm-modal
+    (closeEvent)="showDeletePersonModal = false"
+    (confirm)="onConfirmDeletion($event)">
+  </app-confirm-modal>
+}

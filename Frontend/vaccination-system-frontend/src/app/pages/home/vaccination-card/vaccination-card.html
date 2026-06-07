@@ -20,7 +20,8 @@
 
 @if (showRegisterVaccinationModal) {
   <app-vaccination-register-modal
-    (closeEvent)="showRegisterVaccinationModal = false">
+    (closeEvent)="showRegisterVaccinationModal = false"
+    (confirmRegisterEvent)="onConfirmRegisterVaccination($event)">
   </app-vaccination-register-modal>
 }
 

@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, signal, SimpleChanges } from '@angular/core';
 import { GetPersonDto } from '../../../api/person/person.type';
 import { GetVaccinationDto } from '../../../api/vaccination/vaccination.type';
-import { VaccinationRegisterModal } from '../../../shared/components/vaccination-register-modal/vaccination-register-modal';
+import { NewVaccination, VaccinationRegisterModal } from '../../../shared/components/vaccination-register-modal/vaccination-register-modal';
 import { ConfirmModal } from '../../../shared/components/confirm-modal/confirm-modal';
 import { DoseManagementDto, DoseManagementModal } from '../../../shared/components/dose-management-modal/dose-management-modal';
 import { PersonService } from '../../../api/person/person.service';
 import { Spinner } from '../../../shared/components/spinner/spinner';
+import { VaccinationService } from '../../../api/vaccination/vaccination.service';
 
 type Dose = {
     vaccinationId: string;
@@ -33,7 +34,6 @@ export class VaccinationCard implements OnInit, OnChanges {
   vaccinations: Vaccination[] = [];
 
   selectedDose: DoseManagementDto | null = null;
-  newPerson: string = '';
 
   showDeletePersonModal: boolean = false;
   showRegisterVaccinationModal: boolean = false;
@@ -41,7 +41,10 @@ export class VaccinationCard implements OnInit, OnChanges {
 
   isLoading = signal(false);
 
-  constructor(private personService: PersonService) {}
+  constructor(
+    private personService: PersonService,
+    private vaccinationService: VaccinationService
+  ) {}
 
   ngOnInit(): void {
     this.loadPerson();
@@ -95,6 +98,23 @@ export class VaccinationCard implements OnInit, OnChanges {
 
   onRegisterVaccination() {
     this.showRegisterVaccinationModal = true;
+  }
+
+  onConfirmRegisterVaccination(newVaccination: NewVaccination) {
+    this.vaccinationService.create(
+      this.personId,
+      newVaccination.vaccineId,
+      newVaccination.doseNumber,
+      newVaccination.applicationDate
+    ).subscribe({
+      next: (data) => {
+        this.loadPerson();
+      },
+      error: (err) => {
+        console.error('Post failed', err);
+        this.isLoading.set(false);
+      }
+    });
   }
 
   onDoseClick(dose: Dose, vaccineName: string) {

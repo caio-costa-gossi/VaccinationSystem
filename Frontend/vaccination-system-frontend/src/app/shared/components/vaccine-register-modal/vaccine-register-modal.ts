@@ -11,9 +11,12 @@ import { Modal } from '../modal/modal';
 export class VaccineRegisterModal {
   @Output() closeEvent = new EventEmitter<void>();
 
+  @Output() confirmRegisterEvent = new EventEmitter<string>();
+
   vaccineName = '';
 
   submit() {
+    this.confirmRegisterEvent.emit(this.vaccineName);
     this.closeEvent.emit();
   }
 

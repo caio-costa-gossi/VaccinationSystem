@@ -28,7 +28,6 @@ export class Vaccines implements OnInit {
     this.vaccineService.getAll().subscribe({
       next: (data) => {
         this.vaccines = data;
-        console.log(this.vaccines);
         this.isLoading.set(false);
       },
       error: (err) => {
@@ -43,7 +42,18 @@ export class Vaccines implements OnInit {
   }
 
   onRegisterVaccine() {
-    console.log('Register vaccine');
     this.showVaccineModal = true;
+  }
+
+  onConfirmRegisterVaccine(vaccineName: string) {
+    this.vaccineService.create(vaccineName).subscribe({
+      next: (data) => {
+        this.loadVaccines();
+      },
+      error: (err) => {
+        console.error('Post failed', err);
+        this.isLoading.set(false);
+      }
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, ElementRef, OnInit, signal, ViewChild } from '@angular/core';
 import { VaccinationCard } from './vaccination-card/vaccination-card';
 import { GetPersonsItemDto } from '../../api/person/person.type';
 import { PersonModal } from '../../shared/components/person-modal/person-modal';
@@ -17,6 +17,7 @@ export class Home implements OnInit {
   selectedPersonId: string | null = null;
 
   showRegisterPersonModal: boolean = false;
+  
   isLoading = signal(false);
 
   constructor(private personService: PersonService) {}
@@ -66,6 +67,7 @@ export class Home implements OnInit {
   }
 
   onPersonDeleted() {
+    this.loadPersons();
     this.selectedPersonId = null;
   }
 }

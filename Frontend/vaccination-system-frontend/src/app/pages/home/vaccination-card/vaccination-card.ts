@@ -78,10 +78,19 @@ export class VaccinationCard implements OnInit, OnChanges {
   onConfirmDeletion(confirm: boolean) {
     this.showDeletePersonModal = false;
     
-    if (confirm) {
-      this.personDeleted.emit();
-      console.log('Person deleted!');
-    }
+    if (!confirm)
+      return;
+    
+    this.personService.delete(this.personId).subscribe({
+      next: (data) => {
+        this.isLoading.set(false);
+        this.personDeleted.emit();
+      },
+      error: (err) => {
+        console.error('Delete failed', err);
+        this.isLoading.set(false);
+      }
+    });
   }
 
   onRegisterVaccination() {

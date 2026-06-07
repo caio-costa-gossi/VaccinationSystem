@@ -29,4 +29,8 @@
   </app-person-modal>
 }
 
+@if (isLoading()) {
+  <app-spinner></app-spinner>
+}
+
 <button type="submit" (click)="onRegisterPerson()">Cadastrar novo paciente</button>

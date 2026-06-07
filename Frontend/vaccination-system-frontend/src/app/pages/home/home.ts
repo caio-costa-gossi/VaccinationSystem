@@ -1,25 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { VaccinationCard } from './vaccination-card/vaccination-card';
 import { GetPersonsItemDto } from '../../api/person/person.type';
 import { PersonModal } from '../../shared/components/person-modal/person-modal';
+import { PersonService } from '../../api/person/person.service';
+import { firstValueFrom } from 'rxjs';
+import { Spinner } from '../../shared/components/spinner/spinner';
 
 @Component({
   selector: 'app-home',
-  imports: [VaccinationCard, PersonModal],
+  imports: [VaccinationCard, PersonModal, Spinner],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {
-  people: GetPersonsItemDto[] = [
-    {name: 'João', id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f'},
-    {name: 'Bruno', id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f'},
-    {name: 'Carlos', id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f'},
-    {name: 'Daniela', id: '42cb0f45-7461-4316-8b9e-6465fec2dd4f'}
-  ];
+export class Home implements OnInit {
+  people: GetPersonsItemDto[] = [];
 
   selectedPersonId: string | null = null;
 
   showRegisterPersonModal: boolean = false;
+  isLoading = signal(false);
+
+  constructor(private personService: PersonService) {}
+
+  ngOnInit() {
+    this.loadPersons();
+  }
+
+  loadPersons() {
+    this.isLoading.set(true);
+      
+    this.personService.getAll().subscribe({
+      next: (data) => {
+        this.people = data;
+        this.isLoading.set(false);
+      },
+      error: (err) => {
+        console.error('Fetch failed', err);
+        this.isLoading.set(false);
+      }
+    });
+  }
 
   onSelect(event: EventTarget | null) {
     let htmlEvent = event as HTMLSelectElement;

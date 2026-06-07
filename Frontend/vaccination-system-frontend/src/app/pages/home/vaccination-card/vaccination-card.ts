@@ -49,6 +49,7 @@ export class VaccinationCard implements OnInit {
       next: (data) => {
         this.person = data;
         this.vaccinations = this.mapVaccinations(this.person.vaccinations);
+        this.vaccinations.forEach(v => v.appliedDoses.sort((a,b) => a.doseNumber - b.doseNumber));
 
         this.isLoading.set(false);
       },

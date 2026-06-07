@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { VaccinationCard } from './vaccination-card/vaccination-card';
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-home',
   imports: [VaccinationCard],
-  templateUrl: './main.html',
-  styleUrl: './main.css',
+  templateUrl: './home.html',
+  styleUrl: './home.css',
 })
-export class Main {
+export class Home {
   people = ['Ana', 'Bruno', 'Carlos', 'Daniela'];
   selectedPerson: string | null = null;
 

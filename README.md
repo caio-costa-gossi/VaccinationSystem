@@ -9,8 +9,18 @@ O documento a seguir descreve como executar o projeto e o que foi implementado.
 Para executar o projeto, após cloná-lo, é necessário executar tanto o módulo do backend, quanto do frontend. Todos os comandos devem ser executados a partir da raíz do projeto, onde este documento se encontra.
 
 Windows PowerShell:
-- Frontend: Execute `cd Frontend/vaccination-system-frontend; npm install; ng serve`
-- Backend: Execute `cd Backend/VaccinationSystem/src/VaccinationSystem.Api; dotnet restore; dotnet run`
+- Executar o frontend: 
+```
+cd Frontend/vaccination-system-frontend
+npm install
+ng serve
+```
+- Executar o backend: 
+```
+cd Backend/VaccinationSystem/src/VaccinationSystem.Api
+dotnet restore
+dotnet run
+```
 
 ## Conceitos de negócios
 - Usuário (user): pessoa (cadastrada com nome de usuário e senha, ou não) que utiliza a plataforma.
@@ -43,6 +53,34 @@ Os seguintes requisitos funcionais, descritos no enunciado, foram implementados:
 - A atualização da data de um registro de vacinação, do nome uma pessoa ou do nome de uma vacina não foram implementadas, uma vez que não estão inclusas como requisito funcionais na lista de funcionalidades.
 
 - Registro de usuário e login: Foi implementado mecanismo de autenticação e autorização via JWTs. Assim, o usuário da plataforma pode se cadastrar, com um nome e senha, e realizar o login, utilizando as credenciais criadas. Todas as demais funcionalidades do sistema requerem que o usuário esteja logado.
+
+## Decisões arquiteturais e técnicas
+
+- Utilizar princípios de Clean Architecture:
+	Criar projetos separados para responsabilidades separadas diminui o acoplamento entre diferentes partes do sistema, estabelece limites concretos de ação entre um subsistema e outro, simplifica mudanças futuras e localiza possíveis erros. 
+
+	Além disso, pensar nos contratos e dependências que os subsistemas devem possuir entre si ajuda a entender o sistema como um todo e a localizar possíveis pontos de redundância ou melhoria.
+
+	Assim, o projeto de backend foi dividido em 5 camadas: 
+	- API (ou apresentação)
+	- Aplicação
+	- Domínio
+	- Infraestrutura
+	- Testes 
+
+	O objetivo é que as dependências fiquem voltadas para o domínio, e o domínio seja independente, uma vez que as regras de negócio não devem depender de decisões técnicas.
+
+- Utilizar Domain-Driven Design
+	Domain-Driven Design (DDD) fornece uma approach robusta e sistêmica no que tange às regras de negócio. Ao identificar aggregates, aggregate roots e child entities, é possível localizar dependências de dados, centralizar e simplificar implementações de regras de negócios, garantir a manutenção de invariantes e se proteger contra a futura complexidade do sistema, que, caso contrário, pode levar a duplicação de código, edge-cases escondidos e overhead de manutenção elevado.
+
+- Utilizar GUID (UUID) em vez de inteiros para identificadores:
+	A utilização de GUIDs dificulta ataques externos ao sistema, através do mascaramento da relação entre recursos diferentes, uma vez que não é possível prever a identificação de recursos desconhecidos ou comparar a identificação de recursos diferentes.
+
+	Além disso, reduz a possibilidade de que o identificador de um recurso seja incorretamente reconhecido como o identificador de outro, já que a probabilidade de colisões é reduzida.
+
+- Centralizar handling de exceções em um middleware:
+	Ao utilizar um middleware para centralizar o handling de exceções, é possível padronizar os erros e as respostas que cada caso deve gerar, além de separar o handling de erros da lógica da aplicação, o que torna o código mais modularizado e fácil de entender.
+
 
 ## Projetos implementados
 
@@ -166,7 +204,7 @@ Para manter este arquivo sucinto, os endpoints são formalmente descritos no arq
 #### Modelagem de dados:
 O diagrama representando a modelagem realizada via configuração do Entity Framework Core para a base de dados é exibida a seguir:
 
-
+![Diagrama de modelagem de dados](./docs/diagrama_er.jpg)
 
 ### "Frontend/vaccination-system-frontend": 
 - Frontend da aplicação / camada de UI

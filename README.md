@@ -3,7 +3,13 @@ Sistema de gerenciamento de vacinas
 
 Para a implementação e fácil entrega do projeto, optou-se por manter tanto o frontend quanto o backend no mesmo repositório. Em um projeto real, eles estariam implementados em repositórios diferentes para organização do versionamento.
 
-O documento a seguir descreve o que foi implementado.
+O documento a seguir descreve como executar o projeto e o que foi implementado.
+
+## Executar o projeto
+Para executar o projeto, após cloná-lo, é necessário executar tanto o módulo do backend, quanto do frontend. Todos os comandos devem ser executados a partir da raíz do projeto, onde este documento se encontra.
+
+- Frontend: Execute `cd Frontend/vaccination-system-frontend && ng serve`
+- Backend: Execute `cd Backend/VaccinationSystem/src/VaccinationSystem.Api && dotnet run`
 
 ## Conceitos de negócios
 - Usuário (user): pessoa (cadastrada com nome de usuário e senha, ou não) que utiliza a plataforma.
@@ -40,7 +46,9 @@ Os seguintes requisitos funcionais, descritos no enunciado, foram implementados:
 ## Projetos implementados
 
 ### "Backend/VaccinationSystem": 
-- API e banco de dados
+- API e banco de dados, acessível em http://localhost:5009
+- Swagger UI configurado e acessível em http://localhost:5009/swagger/index.html
+- Documentação de endpoints disponível em http://localhost:5009/swagger/v1/swagger.json
 - ASP.NET Core / .NET 10
 - MediatR 14.1.0
 - Swashbuckle.AspNetCore 10.2.1
@@ -154,6 +162,7 @@ O diagrama representando a modelagem realizada via configuração do Entity Fram
 
 ### "Frontend/vaccination-system-frontend": 
 - Frontend da aplicação / camada de UI
+- Acessível em http://localhost:4200
 - Angular 22
 - Node.js 24.16.0
 

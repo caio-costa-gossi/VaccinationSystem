@@ -3,6 +3,8 @@ using VaccinationSystem.Api.Swagger;
 using VaccinationSystem.Application;
 using VaccinationSystem.Infrastructure;
 using VaccinationSystem.Infrastructure.Auth;
+using VaccinationSystem.Infrastructure.Persistence;
+using VaccinationSystem.Infrastructure.Persistence.Seeder;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +36,14 @@ builder.Services.AddCors(options =>
 });
 
 WebApplication app = builder.Build();
+
+// Configurar DB
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.EnsureCreated();
+    DbSeeder.Seed(db);
+}
 
 // Configurar middlewares
 app.UseMiddleware<ExceptionHandlingMiddleware>();

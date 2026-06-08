@@ -7,6 +7,8 @@ O documento a seguir descreve como executar o projeto e o que foi implementado.
 
 # Índice
 - [Executar o projeto](#executar-o-projeto)
+	- [Executar via Docker](#executar-via-docker)
+	- [Executar manualmente](#executar-manualmente)
 - [Conceitos de negócios](#conceitos-de-negócios)
 - [Requisitos funcionais](#requisitos-funcionais)
 - [Decisões arquiteturais e técnicas](#decisões-arquiteturais-e-técnicas)
@@ -20,9 +22,23 @@ O documento a seguir descreve como executar o projeto e o que foi implementado.
 - [Commits](#commits)
 
 ## Executar o projeto
-Para executar o projeto, após cloná-lo, é necessário executar tanto o módulo do backend, quanto do frontend. Todos os comandos devem ser executados a partir da raíz do projeto, onde este documento se encontra.
 
-Windows PowerShell:
+Existem dois jeitos de executar o projeto após cloná-lo, através do `docker compose` ou manualmente. Todos os comandos devem ser executados a partir da raíz do projeto, onde este documento se encontra.
+
+### Executar via Docker
+
+Para executar o projeto via docker, basta executar o comando a seguir:
+```
+docker compose up --build
+```
+
+A API estará disponível em http://localhost:8080
+O frontend estará disponível em http://localhost:4200
+
+### Executar manualmente
+
+Para executar manualmente, é necessário executar tanto o módulo do backend, quanto do frontend. 
+
 - Executar o frontend: 
 ```
 cd Frontend/vaccination-system-frontend
@@ -36,7 +52,7 @@ dotnet restore
 dotnet run
 ```
 
-A API estará disponível em http://localhost:5009
+A API estará disponível em http://localhost:8080
 O frontend estará disponível em http://localhost:4200
 
 ## Conceitos de negócios
@@ -106,9 +122,9 @@ Os seguintes requisitos funcionais, descritos no enunciado, foram implementados:
 ## Projetos implementados
 
 ### Backend/VaccinationSystem: 
-- API e banco de dados, acessível em http://localhost:5009
-- Swagger UI configurado e acessível em http://localhost:5009/swagger/index.html
-- Documentação de endpoints disponível em http://localhost:5009/swagger/v1/swagger.json
+- API e banco de dados, acessível em http://localhost:8080
+- Swagger UI configurado e acessível em http://localhost:8080/swagger/index.html
+- Documentação de endpoints disponível em http://localhost:8080/swagger/v1/swagger.json
 - ASP.NET Core / .NET 10
 - Entity Framework Core 10.0.8
 - MediatR 14.1.0

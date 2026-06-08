@@ -59,7 +59,7 @@ Autentica o usuário e retorna um token JWT.
 
 ```json
 {
-  "token": "jwt-token"
+  "accessToken": "jwt-token"
 }
 ```
 
@@ -115,9 +115,7 @@ Registra um novo paciente.
 **200 OK**
 
 ```json
-{
-  "id": "a7fd4d97-f2dc-44af-a6ab-67df3dc40f2f"
-}
+"a7fd4d97-f2dc-44af-a6ab-67df3dc40f2f"
 ```
 
 #### Respostas de erro
@@ -222,9 +220,7 @@ Cadastra um registro de vacinação para um paciente.
 **200 OK**
 
 ```json
-{
-  "id": "f4c5ec58-6440-4d9f-a6d9-b7f2480a73b4"
-}
+"f4c5ec58-6440-4d9f-a6d9-b7f2480a73b4"
 ```
 
 #### Respostas de erro
@@ -305,9 +301,7 @@ Cria uma nova vacina.
 **200 OK**
 
 ```json
-{
-  "id": "c5c6a1a4-67fb-4895-99e2-c56f8bc6a8a9"
-}
+"c5c6a1a4-67fb-4895-99e2-c56f8bc6a8a9"
 ```
 
 #### Respostas de erro

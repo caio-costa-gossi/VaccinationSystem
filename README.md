@@ -151,7 +151,13 @@ Para o desenvolvimento da API foi utilizado o conceito de Domain-Driven Design (
 
 	Contém os testes unitários desenvolvidos para os projetos. Os testes devem ser divididos de acordo com o nível dos componentes testados. Apenas testes referentes à camada de aplicação (handlers e validators) foram implementados, sendo que testes referentes à camada de infraestrutura (repositories e serviços de auth) também poderiam ser criados.
 
-	- Application: Contém os testes unitários da camada de aplicação. Toda a estrutura de arquivos é um espelho da estrutura criada para os use-cases de VaccinationSystem.Application e a nomenclatura segue o padrão `{classe testada}Tests.cs`. As funções que definem os testes seguem o padrão de nomenclatura `{método da classe a ser testado}_{condições propostas para o teste}_{resultado esperado}`.
+	- Application: 
+
+	Contém os testes unitários da camada de aplicação. Toda a estrutura de arquivos é um espelho da estrutura criada para os use-cases de VaccinationSystem.Application e a nomenclatura segue o padrão `{classe testada}Tests.cs`. 
+
+	As funções que definem os testes seguem o padrão de nomenclatura `{método da classe a ser testado}_{condições propostas para o teste}_{resultado esperado}`.
+
+	Ao total, foram implementados 49 testes, cobrindo as validações esperadas para respostas de erro dos endpoints.
 
 #### Endpoints desenvolvidos:
 Para manter este arquivo sucinto, os endpoints são formalmente descritos no arquivo `endpoints.md`

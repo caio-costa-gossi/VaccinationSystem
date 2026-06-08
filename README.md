@@ -9,8 +9,8 @@ O documento a seguir descreve como executar o projeto e o que foi implementado.
 Para executar o projeto, após cloná-lo, é necessário executar tanto o módulo do backend, quanto do frontend. Todos os comandos devem ser executados a partir da raíz do projeto, onde este documento se encontra.
 
 Windows PowerShell:
-- Frontend: Execute `cd Frontend/vaccination-system-frontend; ng serve`
-- Backend: Execute `cd Backend/VaccinationSystem/src/VaccinationSystem.Api; dotnet run`
+- Frontend: Execute `cd Frontend/vaccination-system-frontend; npm install; ng serve`
+- Backend: Execute `cd Backend/VaccinationSystem/src/VaccinationSystem.Api; dotnet restore; dotnet run`
 
 ## Conceitos de negócios
 - Usuário (user): pessoa (cadastrada com nome de usuário e senha, ou não) que utiliza a plataforma.

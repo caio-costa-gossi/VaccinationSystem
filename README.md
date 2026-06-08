@@ -51,6 +51,7 @@ Os seguintes requisitos funcionais, descritos no enunciado, foram implementados:
 - Swagger UI configurado e acessível em http://localhost:5009/swagger/index.html
 - Documentação de endpoints disponível em http://localhost:5009/swagger/v1/swagger.json
 - ASP.NET Core / .NET 10
+- Entity Framework Core 10.0.8
 - MediatR 14.1.0
 - Swashbuckle.AspNetCore 10.2.1
 - FluentValidation 12.1.1

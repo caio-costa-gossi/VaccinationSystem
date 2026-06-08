@@ -20,17 +20,18 @@ export class Login {
   ) {}
   
   async submit() {
-    try {
-      const res: any = await firstValueFrom(
-        this.authService.login(this.username, this.password)
-      );
+    this.authService.login(this.username, this.password)
+    .subscribe({
+      next: (data) => {
+        localStorage.setItem('token', data.accessToken);
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Post failed', err);
 
-      localStorage.setItem('token', res.accessToken);
-      this.router.navigate(['/home']);
-
-    } 
-    catch (err) {
-      console.error('Login failed', err);
-    }
+        if (err.error.message)
+          alert(err.error.message);
+      }
+    });
   }
 }

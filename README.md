@@ -5,6 +5,20 @@ Para a implementação e fácil entrega do projeto, optou-se por manter tanto o 
 
 O documento a seguir descreve como executar o projeto e o que foi implementado.
 
+# Índice
+- [Executar o projeto](#executar-o-projeto)
+- [Conceitos de negócios](#conceitos-de-negócios)
+- [Requisitos funcionais](#requisitos-funcionais)
+- [Decisões arquiteturais e técnicas](#decisões-arquiteturais-e-técnicas)
+- [Projetos implementados](#projetos-implementados)
+  - [Backend/VaccinationSystem](#backendvaccinationsystem)
+    - [Organização do projeto](#organização-do-projeto)
+    - [Endpoints desenvolvidos](#endpoints-desenvolvidos)
+    - [Modelagem de dados](#modelagem-de-dados)
+  - [Frontend/vaccination-system-frontend](#frontendvaccination-system-frontend)
+    - [Organização do projeto](#organização-do-projeto-1)
+- [Commits](#commits)
+
 ## Executar o projeto
 Para executar o projeto, após cloná-lo, é necessário executar tanto o módulo do backend, quanto do frontend. Todos os comandos devem ser executados a partir da raíz do projeto, onde este documento se encontra.
 
@@ -21,6 +35,9 @@ cd Backend/VaccinationSystem/src/VaccinationSystem.Api
 dotnet restore
 dotnet run
 ```
+
+A API estará disponível em http://localhost:5009
+O frontend estará disponível em http://localhost:4200
 
 ## Conceitos de negócios
 - Usuário (user): pessoa (cadastrada com nome de usuário e senha, ou não) que utiliza a plataforma.
@@ -57,6 +74,7 @@ Os seguintes requisitos funcionais, descritos no enunciado, foram implementados:
 ## Decisões arquiteturais e técnicas
 
 - Utilizar princípios de Clean Architecture:
+
 	Criar projetos separados para responsabilidades separadas diminui o acoplamento entre diferentes partes do sistema, estabelece limites concretos de ação entre um subsistema e outro, simplifica mudanças futuras e localiza possíveis erros. 
 
 	Além disso, pensar nos contratos e dependências que os subsistemas devem possuir entre si ajuda a entender o sistema como um todo e a localizar possíveis pontos de redundância ou melhoria.
@@ -71,20 +89,23 @@ Os seguintes requisitos funcionais, descritos no enunciado, foram implementados:
 	O objetivo é que as dependências fiquem voltadas para o domínio, e o domínio seja independente, uma vez que as regras de negócio não devem depender de decisões técnicas.
 
 - Utilizar Domain-Driven Design
+
 	Domain-Driven Design (DDD) fornece uma approach robusta e sistêmica no que tange às regras de negócio. Ao identificar aggregates, aggregate roots e child entities, é possível localizar dependências de dados, centralizar e simplificar implementações de regras de negócios, garantir a manutenção de invariantes e se proteger contra a futura complexidade do sistema, que, caso contrário, pode levar a duplicação de código, edge-cases escondidos e overhead de manutenção elevado.
 
 - Utilizar GUID (UUID) em vez de inteiros para identificadores:
+
 	A utilização de GUIDs dificulta ataques externos ao sistema, através do mascaramento da relação entre recursos diferentes, uma vez que não é possível prever a identificação de recursos desconhecidos ou comparar a identificação de recursos diferentes.
 
 	Além disso, reduz a possibilidade de que o identificador de um recurso seja incorretamente reconhecido como o identificador de outro, já que a probabilidade de colisões é reduzida.
 
 - Centralizar handling de exceções em um middleware:
+
 	Ao utilizar um middleware para centralizar o handling de exceções, é possível padronizar os erros e as respostas que cada caso deve gerar, além de separar o handling de erros da lógica da aplicação, o que torna o código mais modularizado e fácil de entender.
 
 
 ## Projetos implementados
 
-### "Backend/VaccinationSystem": 
+### Backend/VaccinationSystem: 
 - API e banco de dados, acessível em http://localhost:5009
 - Swagger UI configurado e acessível em http://localhost:5009/swagger/index.html
 - Documentação de endpoints disponível em http://localhost:5009/swagger/v1/swagger.json
@@ -206,7 +227,7 @@ O diagrama representando a modelagem realizada via configuração do Entity Fram
 
 ![Diagrama de modelagem de dados](./docs/diagrama_er.jpg)
 
-### "Frontend/vaccination-system-frontend": 
+### Frontend/vaccination-system-frontend: 
 - Frontend da aplicação / camada de UI
 - Acessível em http://localhost:4200
 - Angular 22

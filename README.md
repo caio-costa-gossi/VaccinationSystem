@@ -25,6 +25,13 @@ O documento a seguir descreve como executar o projeto e o que foi implementado.
 
 Existem dois jeitos de executar o projeto após cloná-lo, através do `docker compose` ou manualmente. Todos os comandos devem ser executados a partir da raíz do projeto, onde este documento se encontra.
 
+Para os dois métodos, a aplicação terá dados de exemplo.
+
+O usuário disponível para login possui as seguintes credenciais:
+
+- Nome: user
+- Senha: user
+
 ### Executar via Docker
 
 Para executar o projeto via docker, basta executar o comando a seguir:
@@ -33,6 +40,7 @@ docker compose up --build
 ```
 
 A API estará disponível em http://localhost:8080
+
 O frontend estará disponível em http://localhost:4200
 
 ### Executar manualmente
@@ -53,6 +61,7 @@ dotnet run
 ```
 
 A API estará disponível em http://localhost:8080
+
 O frontend estará disponível em http://localhost:4200
 
 ## Conceitos de negócios

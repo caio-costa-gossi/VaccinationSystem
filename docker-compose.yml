@@ -1,0 +1,18 @@
+services:
+  api:
+    build:
+      context: ./Backend/VaccinationSystem
+      dockerfile: Dockerfile
+    container_name: vaccination-system-api
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./Frontend/vaccination-system-frontend
+      dockerfile: Dockerfile
+    container_name: vaccination-system-frontend
+    depends_on:
+      - api
+    ports:
+      - "4200:80"

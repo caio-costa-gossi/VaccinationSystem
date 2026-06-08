@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text eol=crlf
+
+# Commit .db diretamente
+*.db binary
+*.sqlite binary
